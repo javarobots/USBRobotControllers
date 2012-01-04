@@ -1,0 +1,16 @@
+The USB Robot Controller Application is a Java application intended to make the
+control of robots utilizing USB joysticks or game pads easier. Joystick can be
+added to the library of available joysticks by writing joystick specific classes
+an adding them to the library.
+
+In many cases a user may not know what the functionality of a specific joystick
+is. In this case the application has a characterization UI which shows the button
+names and allows the user to manipulate them to get the device output values.
+Again, after writing the necessary joystick specific class the application will
+have access to it.
+
+Output from the program is also user configurable. Since the intent is to control
+connected robots, the output will require configuration. In this instance the
+output is configured using XML files indicating what buttons will produce an 
+output and what that output will be. This allows known joystick in the library
+to produce different outputs based on the user created XML file.
