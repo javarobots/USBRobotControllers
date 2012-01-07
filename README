@@ -14,3 +14,9 @@ connected robots, the output will require configuration. In this instance the
 output is configured using XML files indicating what buttons will produce an 
 output and what that output will be. This allows known joystick in the library
 to produce different outputs based on the user created XML file.
+
+Setup:
+Initial setup of the application requires the executable jar file to be ran with
+the libraries argument. This must be accomplished on the command line. 
+
+java -jar USBRobotControllers.jar libaries
