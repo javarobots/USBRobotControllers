@@ -17,6 +17,9 @@ to produce different outputs based on the user created XML file.
 
 Setup:
 Initial setup of the application requires the executable jar file to be ran with
-the libraries argument. This must be accomplished on the command line. 
+the arguments for RxTx and JInput. This must be accomplished on the command line. 
 
-java -jar USBRobotControllers.jar libaries
+java -jar USBRobotControllers.jar rxtx
+javs -jar USBRobotCOntrollers.jar jinput
+
+The order of running these is not important.

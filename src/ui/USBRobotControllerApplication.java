@@ -20,12 +20,20 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new USBRobotControllerApplication().setVisible(true);
+        if (args.length == 0){
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new USBRobotControllerApplication().setVisible(true);
+                }
+            });
+        } else if (args.length == 1) {
+            if (args[0].equals("jinput")){
+                
+            } else if (args[0].equals("rxtx")){
+                
             }
-        });
+        }
     }
 
     /** Creates new form USBRobotControllerApplication */
