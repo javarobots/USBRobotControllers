@@ -10,6 +10,14 @@
  */
 package ui;
 
+import commonutilities.swing.ComponentPosition;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import ui.installation.JinputInstallationFrame;
+import ui.installation.RxtxInstallationFrame;
+
 /**
  *
  * @author Parham
@@ -24,14 +32,36 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new USBRobotControllerApplication().setVisible(true);
+                    setLookAndFeel();
+                    //Center the frame
+                    USBRobotControllerApplication controller = new USBRobotControllerApplication();
+                    ComponentPosition.centerFrame(controller);
+                    controller.setVisible(true);
                 }
             });
-        } else if (args.length == 1) {
-            if (args[0].equals("jinput")){
-                
-            } else if (args[0].equals("rxtx")){
-                
+        } else if (args.length == 1){
+            if (args[0].equals("rxtx")){
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        setLookAndFeel();
+                        //Center the frame
+                        RxtxInstallationFrame dialog = new RxtxInstallationFrame();
+                        ComponentPosition.centerFrame(dialog);
+                        dialog.setVisible(true);
+                    }
+                });
+            } else if (args[0].equals("jinput")){
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        setLookAndFeel();
+                        //Center the frame
+                        JinputInstallationFrame dialog = new JinputInstallationFrame();
+                        ComponentPosition.centerFrame(dialog);
+                        dialog.setVisible(true);
+                    }
+                });
             }
         }
     }
@@ -67,4 +97,20 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    private static void setLookAndFeel(){
+        //Set the look and feel to Nimbus
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(USBRobotControllerApplication.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(USBRobotControllerApplication.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(USBRobotControllerApplication.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(USBRobotControllerApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

@@ -24,10 +24,10 @@ import javax.swing.JOptionPane;
  *
  * @author Parham
  */
-public class JinputInstallationDialog extends javax.swing.JFrame {
+public class JinputInstallationFrame extends javax.swing.JFrame {
 
     /** Creates new form RxtxInstallationDialog */
-    public JinputInstallationDialog() {
+    public JinputInstallationFrame() {
         super();
         initComponents();
     }
@@ -124,17 +124,16 @@ public class JinputInstallationDialog extends javax.swing.JFrame {
                     .addComponent(directoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selectButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioButton_32Bit)
+                    .addComponent(radioButton_64Bit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(radioButton_32Bit)
-                            .addComponent(radioButton_64Bit))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cancelButton)
-                        .addComponent(okButton)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(okButton))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -224,7 +223,7 @@ public class JinputInstallationDialog extends javax.swing.JFrame {
             this.dispose();
             
         } catch (IOException ex) {
-            Logger.getLogger(JinputInstallationDialog.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JinputInstallationFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
 }

@@ -24,10 +24,10 @@ import javax.swing.JOptionPane;
  *
  * @author Parham
  */
-public class RxtxInstallationDialog extends javax.swing.JFrame {
+public class RxtxInstallationFrame extends javax.swing.JFrame {
 
     /** Creates new form RxtxInstallationDialog */
-    public RxtxInstallationDialog() {
+    public RxtxInstallationFrame() {
         super();
         initComponents();
     }
@@ -115,7 +115,7 @@ public class RxtxInstallationDialog extends javax.swing.JFrame {
                         .addComponent(cancelButton)
                         .addComponent(okButton))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,7 +185,7 @@ public class RxtxInstallationDialog extends javax.swing.JFrame {
             out.close();            
             this.dispose();
         } catch (IOException ex) {
-            Logger.getLogger(RxtxInstallationDialog.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RxtxInstallationFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
 }
