@@ -29,12 +29,12 @@
                 <Property name="text" type="java.lang.String" value="Select Controller"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="jinputVersionMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Show JInput Version"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jinputVersionMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
