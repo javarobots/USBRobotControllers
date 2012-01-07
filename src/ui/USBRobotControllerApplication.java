@@ -13,8 +13,10 @@ package ui;
 import commonutilities.swing.ComponentPosition;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import net.java.games.input.Version;
 import ui.installation.JinputInstallationFrame;
 import ui.installation.RxtxInstallationFrame;
 
@@ -86,6 +88,7 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         selectControllerMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Robot Controller");
@@ -108,6 +111,14 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
 
         selectControllerMenuItem.setText("Select Controller");
         editMenu.add(selectControllerMenuItem);
+
+        jMenuItem1.setText("Show JInput Version");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        editMenu.add(jMenuItem1);
 
         menuBar.add(editMenu);
 
@@ -137,11 +148,16 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        JOptionPane.showMessageDialog(this, "JInput version: " + Version.getVersion(),  "JInput Version", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem selectControllerMenuItem;
     // End of variables declaration//GEN-END:variables
