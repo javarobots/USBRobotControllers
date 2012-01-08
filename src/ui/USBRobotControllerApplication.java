@@ -86,8 +86,9 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
-        characterizeMenuItem = new javax.swing.JMenu();
+        editMenu = new javax.swing.JMenu();
         selectControllerMenuItem = new javax.swing.JMenuItem();
+        characterizeMenuItem = new javax.swing.JMenuItem();
         jinputVersionMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,10 +108,18 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        characterizeMenuItem.setText("Edit");
+        editMenu.setText("Edit");
 
         selectControllerMenuItem.setText("Select Controller");
-        characterizeMenuItem.add(selectControllerMenuItem);
+        editMenu.add(selectControllerMenuItem);
+
+        characterizeMenuItem.setText("Characterize Controller...");
+        characterizeMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                characterizeMenuItemActionPerformed(evt);
+            }
+        });
+        editMenu.add(characterizeMenuItem);
 
         jinputVersionMenuItem.setText("Show JInput Version");
         jinputVersionMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +130,7 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         editMenu.add(jinputVersionMenuItem);
 
         menuBar.add(editMenu);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,12 +162,18 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "JInput version: " + Version.getVersion(),  "JInput Version", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_jinputVersionMenuItemActionPerformed
 
+    private void characterizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_characterizeMenuItemActionPerformed
+        CharacterizeDialog dialog = new CharacterizeDialog(this, true);
+        ComponentPosition.centerFrame(dialog);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_characterizeMenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu characterizeMenuItem;
+    private javax.swing.JMenuItem characterizeMenuItem;
+    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem jinputVersionMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem selectControllerMenuItem;
