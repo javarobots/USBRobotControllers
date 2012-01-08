@@ -42,50 +42,50 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         bitButtonGroup = new javax.swing.ButtonGroup();
-        directoryLabel = new javax.swing.JLabel();
-        directoryTextField = new javax.swing.JTextField();
-        selectButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
-        okButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        radioButton_32Bit = new javax.swing.JRadioButton();
-        radioButton_64Bit = new javax.swing.JRadioButton();
+        mDirectoryLabel = new javax.swing.JLabel();
+        mDirectoryTextField = new javax.swing.JTextField();
+        mSelectButton = new javax.swing.JButton();
+        mCancelButton = new javax.swing.JButton();
+        mOkButton = new javax.swing.JButton();
+        mInforLabel = new javax.swing.JLabel();
+        mRadioButton_32Bit = new javax.swing.JRadioButton();
+        mRadioButton_64Bit = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("JInput Installation");
         setResizable(false);
 
-        directoryLabel.setText("Installation Directorry:");
+        mDirectoryLabel.setText("Installation Directorry:");
 
-        selectButton.setText("Select");
-        selectButton.addActionListener(new java.awt.event.ActionListener() {
+        mSelectButton.setText("Select");
+        mSelectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectButtonActionPerformed(evt);
+                mSelectButtonActionPerformed(evt);
             }
         });
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+        mCancelButton.setText("Cancel");
+        mCancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                mCancelButtonActionPerformed(evt);
             }
         });
 
-        okButton.setText("OK");
-        okButton.addActionListener(new java.awt.event.ActionListener() {
+        mOkButton.setText("OK");
+        mOkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
+                mOkButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("<html>\nThe installation directory should be the bin directory of the JRE and/or JDK.\n</html>");
+        mInforLabel.setText("<html>\nThe installation directory should be the bin directory of the JRE and/or JDK.\n</html>");
 
-        bitButtonGroup.add(radioButton_32Bit);
-        radioButton_32Bit.setSelected(true);
-        radioButton_32Bit.setText("32 Bit");
+        bitButtonGroup.add(mRadioButton_32Bit);
+        mRadioButton_32Bit.setSelected(true);
+        mRadioButton_32Bit.setText("32 Bit");
 
-        bitButtonGroup.add(radioButton_64Bit);
-        radioButton_64Bit.setText("64 Bit");
+        bitButtonGroup.add(mRadioButton_64Bit);
+        mRadioButton_64Bit.setText("64 Bit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,64 +95,64 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(radioButton_32Bit)
+                        .addComponent(mRadioButton_32Bit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioButton_64Bit))
+                        .addComponent(mRadioButton_64Bit))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(directoryLabel)
+                        .addComponent(mDirectoryLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(directoryTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                        .addComponent(mDirectoryTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectButton))
+                        .addComponent(mSelectButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mInforLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                        .addComponent(okButton)
+                        .addComponent(mOkButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton)))
+                        .addComponent(mCancelButton)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cancelButton, okButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {mCancelButton, mOkButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(directoryLabel)
-                    .addComponent(directoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectButton))
+                    .addComponent(mDirectoryLabel)
+                    .addComponent(mDirectoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mSelectButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioButton_32Bit)
-                    .addComponent(radioButton_64Bit))
+                    .addComponent(mRadioButton_32Bit)
+                    .addComponent(mRadioButton_64Bit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cancelButton)
-                        .addComponent(okButton))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(mCancelButton)
+                        .addComponent(mOkButton))
+                    .addComponent(mInforLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void mCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mCancelButtonActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }//GEN-LAST:event_mCancelButtonActionPerformed
 
-    private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
+    private void mSelectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSelectButtonActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (chooser.showDialog(this, "Select") == JFileChooser.APPROVE_OPTION){
-            directoryTextField.setText(chooser.getSelectedFile().getAbsolutePath());
+            mDirectoryTextField.setText(chooser.getSelectedFile().getAbsolutePath());
         }
-    }//GEN-LAST:event_selectButtonActionPerformed
+    }//GEN-LAST:event_mSelectButtonActionPerformed
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        String dir = directoryTextField.getText();
+    private void mOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mOkButtonActionPerformed
+        String dir = mDirectoryTextField.getText();
         if (!dir.equals("") && (new File(dir)).isDirectory()){
             performCopy();
         }
@@ -160,18 +160,18 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "The selected directory it not valid. Installation failed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         System.exit(0);
-    }//GEN-LAST:event_okButtonActionPerformed
+    }//GEN-LAST:event_mOkButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bitButtonGroup;
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JLabel directoryLabel;
-    private javax.swing.JTextField directoryTextField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton okButton;
-    private javax.swing.JRadioButton radioButton_32Bit;
-    private javax.swing.JRadioButton radioButton_64Bit;
-    private javax.swing.JButton selectButton;
+    private javax.swing.JButton mCancelButton;
+    private javax.swing.JLabel mDirectoryLabel;
+    private javax.swing.JTextField mDirectoryTextField;
+    private javax.swing.JLabel mInforLabel;
+    private javax.swing.JButton mOkButton;
+    private javax.swing.JRadioButton mRadioButton_32Bit;
+    private javax.swing.JRadioButton mRadioButton_64Bit;
+    private javax.swing.JButton mSelectButton;
     // End of variables declaration//GEN-END:variables
 
     private void performCopy(){
@@ -183,11 +183,11 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
         //Copy the resource files to the designated directory
         try {
             
-            if (radioButton_32Bit.isSelected()){
+            if (mRadioButton_32Bit.isSelected()){
                 for (String s : bitFiles_32){
                     //Create streams for copying serial file
                     InputStream in = this.getClass().getClassLoader().getResourceAsStream("resources/jinput/" + s);
-                    OutputStream out = new FileOutputStream(directoryTextField.getText() + "/" + s);
+                    OutputStream out = new FileOutputStream(mDirectoryTextField.getText() + "/" + s);
 
                     //Create copy buffer and copy file
                     byte[] buffer = new byte[1024];
@@ -205,7 +205,7 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
                 for (String s : bitFiles_64){
                     //Create streams for copying serial file
                     InputStream in = this.getClass().getClassLoader().getResourceAsStream("resources/jinput/" + s);
-                    OutputStream out = new FileOutputStream(directoryTextField.getText() + "/" + s);
+                    OutputStream out = new FileOutputStream(mDirectoryTextField.getText() + "/" + s);
 
                     //Create copy buffer and copy file
                     byte[] buffer = new byte[1024];

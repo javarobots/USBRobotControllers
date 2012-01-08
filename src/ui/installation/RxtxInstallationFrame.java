@@ -41,41 +41,41 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        directoryLabel = new javax.swing.JLabel();
-        directoryTextField = new javax.swing.JTextField();
-        selectButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
-        okButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        mDirectoryLabel = new javax.swing.JLabel();
+        mDirectoryTextField = new javax.swing.JTextField();
+        mSelectButton = new javax.swing.JButton();
+        mCancelButton = new javax.swing.JButton();
+        mOkButton = new javax.swing.JButton();
+        mInformationLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RxTx Installation");
         setResizable(false);
 
-        directoryLabel.setText("Installation Directorry:");
+        mDirectoryLabel.setText("Installation Directorry:");
 
-        selectButton.setText("Select");
-        selectButton.addActionListener(new java.awt.event.ActionListener() {
+        mSelectButton.setText("Select");
+        mSelectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectButtonActionPerformed(evt);
+                mSelectButtonActionPerformed(evt);
             }
         });
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+        mCancelButton.setText("Cancel");
+        mCancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                mCancelButtonActionPerformed(evt);
             }
         });
 
-        okButton.setText("OK");
-        okButton.addActionListener(new java.awt.event.ActionListener() {
+        mOkButton.setText("OK");
+        mOkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
+                mOkButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("<html>\nThe installation directory should be the bin directory of the JRE and/or JDK.\n</html>");
+        mInformationLabel.setText("<html>\nThe installation directory should be the bin directory of the JRE and/or JDK.\n</html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,56 +85,56 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(directoryLabel)
+                        .addComponent(mDirectoryLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(directoryTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                        .addComponent(mDirectoryTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectButton))
+                        .addComponent(mSelectButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mInformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                        .addComponent(okButton)
+                        .addComponent(mOkButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton)))
+                        .addComponent(mCancelButton)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cancelButton, okButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {mCancelButton, mOkButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(directoryLabel)
-                    .addComponent(directoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectButton))
+                    .addComponent(mDirectoryLabel)
+                    .addComponent(mDirectoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mSelectButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cancelButton)
-                        .addComponent(okButton))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(mCancelButton)
+                        .addComponent(mOkButton))
+                    .addComponent(mInformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void mCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mCancelButtonActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }//GEN-LAST:event_mCancelButtonActionPerformed
 
-    private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
+    private void mSelectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSelectButtonActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (chooser.showDialog(this, "Select") == JFileChooser.APPROVE_OPTION){
-            directoryTextField.setText(chooser.getSelectedFile().getAbsolutePath());
+            mDirectoryTextField.setText(chooser.getSelectedFile().getAbsolutePath());
         }
-    }//GEN-LAST:event_selectButtonActionPerformed
+    }//GEN-LAST:event_mSelectButtonActionPerformed
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        String dir = directoryTextField.getText();
+    private void mOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mOkButtonActionPerformed
+        String dir = mDirectoryTextField.getText();
         if (!dir.equals("") && (new File(dir)).isDirectory()){
             performCopy();
         }
@@ -142,15 +142,15 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "The selected directory it not valid. Installation failed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         System.exit(0);
-    }//GEN-LAST:event_okButtonActionPerformed
+    }//GEN-LAST:event_mOkButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JLabel directoryLabel;
-    private javax.swing.JTextField directoryTextField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton okButton;
-    private javax.swing.JButton selectButton;
+    private javax.swing.JButton mCancelButton;
+    private javax.swing.JLabel mDirectoryLabel;
+    private javax.swing.JTextField mDirectoryTextField;
+    private javax.swing.JLabel mInformationLabel;
+    private javax.swing.JButton mOkButton;
+    private javax.swing.JButton mSelectButton;
     // End of variables declaration//GEN-END:variables
 
     private void performCopy(){
@@ -158,7 +158,7 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
         try {
             //Create streams for copying serial file
             InputStream in = this.getClass().getClassLoader().getResourceAsStream("resources/rxtx/rxtxSerial.dll");
-            OutputStream out = new FileOutputStream(directoryTextField.getText() + "/rxtxSerial.dll");
+            OutputStream out = new FileOutputStream(mDirectoryTextField.getText() + "/rxtxSerial.dll");
             
             //Create copy buffer and copy file
             byte[] buffer = new byte[1024];
@@ -173,7 +173,7 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
             
             //Create streams for copying parallel file            
             in = this.getClass().getClassLoader().getResourceAsStream("resources/rxtx/rxtxParallel.dll");
-            out = new FileOutputStream(directoryTextField.getText() + "/rxtxParallel.dll");
+            out = new FileOutputStream(mDirectoryTextField.getText() + "/rxtxParallel.dll");
             
             //copy file
             while ((len = in.read(buffer)) > 0){

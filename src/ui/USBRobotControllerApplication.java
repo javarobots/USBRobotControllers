@@ -83,56 +83,56 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        selectControllerMenuItem = new javax.swing.JMenuItem();
-        characterizeMenuItem = new javax.swing.JMenuItem();
-        jinputVersionMenuItem = new javax.swing.JMenuItem();
+        mControllerLabel = new javax.swing.JLabel();
+        mMenuBar = new javax.swing.JMenuBar();
+        mFileMenu = new javax.swing.JMenu();
+        mExitMenuItem = new javax.swing.JMenuItem();
+        mEditMenu = new javax.swing.JMenu();
+        mSelectControllerMenuItem = new javax.swing.JMenuItem();
+        mCharacterizeMenuItem = new javax.swing.JMenuItem();
+        mJinputVersionMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Robot Controller");
 
-        jLabel1.setText("Controller: Not Selected");
+        mControllerLabel.setText("Controller: Not Selected");
 
-        fileMenu.setText("File");
+        mFileMenu.setText("File");
 
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        mExitMenuItem.setText("Exit");
+        mExitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
+                mExitMenuItemActionPerformed(evt);
             }
         });
-        fileMenu.add(exitMenuItem);
+        mFileMenu.add(mExitMenuItem);
 
-        menuBar.add(fileMenu);
+        mMenuBar.add(mFileMenu);
 
-        editMenu.setText("Edit");
+        mEditMenu.setText("Edit");
 
-        selectControllerMenuItem.setText("Select Controller");
-        editMenu.add(selectControllerMenuItem);
+        mSelectControllerMenuItem.setText("Select Controller");
+        mEditMenu.add(mSelectControllerMenuItem);
 
-        characterizeMenuItem.setText("Characterize Controller...");
-        characterizeMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        mCharacterizeMenuItem.setText("Characterize Controller...");
+        mCharacterizeMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                characterizeMenuItemActionPerformed(evt);
+                mCharacterizeMenuItemActionPerformed(evt);
             }
         });
-        editMenu.add(characterizeMenuItem);
+        mEditMenu.add(mCharacterizeMenuItem);
 
-        jinputVersionMenuItem.setText("Show JInput Version");
-        jinputVersionMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        mJinputVersionMenuItem.setText("Show JInput Version");
+        mJinputVersionMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jinputVersionMenuItemActionPerformed(evt);
+                mJinputVersionMenuItemActionPerformed(evt);
             }
         });
-        editMenu.add(jinputVersionMenuItem);
+        mEditMenu.add(mJinputVersionMenuItem);
 
-        menuBar.add(editMenu);
+        mMenuBar.add(mEditMenu);
 
-        setJMenuBar(menuBar);
+        setJMenuBar(mMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,44 +140,44 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(mControllerLabel)
                 .addContainerGap(275, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(mControllerLabel)
                 .addContainerGap(254, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+    private void mExitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mExitMenuItemActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
+    }//GEN-LAST:event_mExitMenuItemActionPerformed
 
 
-    private void jinputVersionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jinputVersionMenuItemActionPerformed
+    private void mJinputVersionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJinputVersionMenuItemActionPerformed
         JOptionPane.showMessageDialog(this, "JInput version: " + Version.getVersion(),  "JInput Version", JOptionPane.PLAIN_MESSAGE);
-    }//GEN-LAST:event_jinputVersionMenuItemActionPerformed
+    }//GEN-LAST:event_mJinputVersionMenuItemActionPerformed
 
-    private void characterizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_characterizeMenuItemActionPerformed
+    private void mCharacterizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mCharacterizeMenuItemActionPerformed
         CharacterizeDialog dialog = new CharacterizeDialog(this, true);
         ComponentPosition.centerFrame(dialog);
         dialog.setVisible(true);
-    }//GEN-LAST:event_characterizeMenuItemActionPerformed
+    }//GEN-LAST:event_mCharacterizeMenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem characterizeMenuItem;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuItem jinputVersionMenuItem;
-    private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem selectControllerMenuItem;
+    private javax.swing.JMenuItem mCharacterizeMenuItem;
+    private javax.swing.JLabel mControllerLabel;
+    private javax.swing.JMenu mEditMenu;
+    private javax.swing.JMenuItem mExitMenuItem;
+    private javax.swing.JMenu mFileMenu;
+    private javax.swing.JMenuItem mJinputVersionMenuItem;
+    private javax.swing.JMenuBar mMenuBar;
+    private javax.swing.JMenuItem mSelectControllerMenuItem;
     // End of variables declaration//GEN-END:variables
 
     private static void setLookAndFeel(){
