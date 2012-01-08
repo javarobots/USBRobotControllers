@@ -8,7 +8,7 @@
  *
  * Created on Jan 7, 2012, 10:40:10 PM
  */
-package ui;
+package ui.characterize;
 
 import java.util.HashMap;
 import java.util.Map;

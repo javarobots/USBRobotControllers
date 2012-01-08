@@ -10,6 +10,7 @@
  */
 package ui;
 
+import ui.characterize.CharacterizeDialog;
 import commonutilities.swing.ComponentPosition;
 import java.util.logging.Level;
 import java.util.logging.Logger;
