@@ -4,7 +4,7 @@
  */
 
 /*
- * USBRobotControllerApplication.java
+ * USBRobotGamepadApp.java
  *
  * Created on Jan 3, 2012, 9:19:17 PM
  */
@@ -25,7 +25,7 @@ import ui.installation.RxtxInstallationFrame;
  *
  * @author Parham
  */
-public class USBRobotControllerApplication extends javax.swing.JFrame {
+public class USBRobotGamepadApp extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
@@ -37,7 +37,7 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
                 public void run() {
                     setLookAndFeel();
                     //Center the frame
-                    USBRobotControllerApplication controller = new USBRobotControllerApplication();
+                    USBRobotGamepadApp controller = new USBRobotGamepadApp();
                     ComponentPosition.centerFrame(controller);
                     controller.setVisible(true);
                 }
@@ -69,8 +69,8 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         }
     }
 
-    /** Creates new form USBRobotControllerApplication */
-    public USBRobotControllerApplication() {
+    /** Creates new form USBRobotGamepadApp */
+    public USBRobotGamepadApp() {
         initComponents();
     }
 
@@ -84,6 +84,7 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
     private void initComponents() {
 
         mControllerLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         mMenuBar = new javax.swing.JMenuBar();
         mFileMenu = new javax.swing.JMenu();
         mExitMenuItem = new javax.swing.JMenuItem();
@@ -96,6 +97,8 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         setTitle("Robot Controller");
 
         mControllerLabel.setText("Controller: Not Selected");
+
+        jLabel1.setText("Controller Model: Not Selected");
 
         mFileMenu.setText("File");
 
@@ -140,15 +143,19 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mControllerLabel)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mControllerLabel)
+                    .addComponent(jLabel1))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(mControllerLabel)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,6 +177,7 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_mCharacterizeMenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem mCharacterizeMenuItem;
     private javax.swing.JLabel mControllerLabel;
     private javax.swing.JMenu mEditMenu;
@@ -185,13 +193,13 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(USBRobotControllerApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(USBRobotControllerApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(USBRobotControllerApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(USBRobotControllerApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
