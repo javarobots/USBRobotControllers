@@ -13,12 +13,13 @@ package ui.characterize;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import net.java.games.input.Controller.Type;
-import net.java.games.input.ControllerEnvironment;
+import util.jinput.JinputUtilities;
 
 /**
  *
@@ -63,6 +64,7 @@ public class CharacterizeDialog extends javax.swing.JDialog {
         mGamepadTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         mGamepadLabel.setText("Gamepad:");
 
@@ -116,7 +118,7 @@ public class CharacterizeDialog extends javax.swing.JDialog {
                     .addComponent(mGamepadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mCharacterizeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mScrollPane)
+                .addComponent(mScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -144,8 +146,7 @@ public class CharacterizeDialog extends javax.swing.JDialog {
 
     private void initGamepads() {
         nameToControllerMap = new HashMap<String,Controller>();
-        ControllerEnvironment env = ControllerEnvironment.getDefaultEnvironment();
-        Controller[] controllers = env.getControllers();
+        List<Controller> controllers = JinputUtilities.availableGamepads();
         for (Controller c : controllers){
             if (c.getType() == Type.GAMEPAD){
                 nameToControllerMap.put(c.getName(), c);

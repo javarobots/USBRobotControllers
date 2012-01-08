@@ -10,4 +10,14 @@ package ui;
  */
 public class USBRobotGamepadAppController {
     
+    private USBRobotGamepadAppModel mModel;
+    
+    public USBRobotGamepadAppController(USBRobotGamepadAppModel model){
+        mModel = model;
+    }
+    
+    public void setSelectedController(){
+        
+    }
+    
 }

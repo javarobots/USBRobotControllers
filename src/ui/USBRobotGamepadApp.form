@@ -24,11 +24,6 @@
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mSelectControllerMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Select Controller"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mCharacterizeMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Characterize Controller..."/>
@@ -76,10 +71,14 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="mControllerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="mControllerLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mControllerComboBox" pref="325" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="mControllerModelLabel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="244" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,10 +86,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="mControllerLabel" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="mControllerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mControllerComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="234" max="32767" attributes="0"/>
+              <Component id="mControllerModelLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="228" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,12 +100,19 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="mControllerLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Controller: Not Selected"/>
+        <Property name="text" type="java.lang.String" value="Controller:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="mControllerModelLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Controller Model: Not Selected"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="mControllerComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

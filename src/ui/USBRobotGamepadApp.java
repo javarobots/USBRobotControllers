@@ -10,13 +10,19 @@
  */
 package ui;
 
+import java.util.Observable;
 import ui.characterize.CharacterizeDialog;
 import commonutilities.swing.ComponentPosition;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import net.java.games.input.Controller;
 import net.java.games.input.Version;
 import ui.installation.JinputInstallationFrame;
 import ui.installation.RxtxInstallationFrame;
@@ -25,7 +31,7 @@ import ui.installation.RxtxInstallationFrame;
  *
  * @author Parham
  */
-public class USBRobotGamepadApp extends javax.swing.JFrame {
+public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
 
     /**
      * @param args the command line arguments
@@ -35,11 +41,16 @@ public class USBRobotGamepadApp extends javax.swing.JFrame {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
+                    //Center the frame and set look and feel
                     setLookAndFeel();
-                    //Center the frame
-                    USBRobotGamepadApp controller = new USBRobotGamepadApp();
-                    ComponentPosition.centerFrame(controller);
-                    controller.setVisible(true);
+                    USBRobotGamepadApp gamepadApp = new USBRobotGamepadApp();
+                    USBRobotGamepadAppModel model = new USBRobotGamepadAppModel();
+                    model.addObserver(gamepadApp);
+                    model.initModel();
+                    model.notifyObservers();
+                    USBRobotGamepadAppController controller = new USBRobotGamepadAppController(model);
+                    ComponentPosition.centerFrame(gamepadApp);
+                    gamepadApp.setVisible(true);
                 }
             });
         } else if (args.length == 1){
@@ -84,21 +95,21 @@ public class USBRobotGamepadApp extends javax.swing.JFrame {
     private void initComponents() {
 
         mControllerLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        mControllerModelLabel = new javax.swing.JLabel();
+        mControllerComboBox = new javax.swing.JComboBox();
         mMenuBar = new javax.swing.JMenuBar();
         mFileMenu = new javax.swing.JMenu();
         mExitMenuItem = new javax.swing.JMenuItem();
         mEditMenu = new javax.swing.JMenu();
-        mSelectControllerMenuItem = new javax.swing.JMenuItem();
         mCharacterizeMenuItem = new javax.swing.JMenuItem();
         mJinputVersionMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Robot Controller");
 
-        mControllerLabel.setText("Controller: Not Selected");
+        mControllerLabel.setText("Controller:");
 
-        jLabel1.setText("Controller Model: Not Selected");
+        mControllerModelLabel.setText("Controller Model: Not Selected");
 
         mFileMenu.setText("File");
 
@@ -113,9 +124,6 @@ public class USBRobotGamepadApp extends javax.swing.JFrame {
         mMenuBar.add(mFileMenu);
 
         mEditMenu.setText("Edit");
-
-        mSelectControllerMenuItem.setText("Select Controller");
-        mEditMenu.add(mSelectControllerMenuItem);
 
         mCharacterizeMenuItem.setText("Characterize Controller...");
         mCharacterizeMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -144,18 +152,23 @@ public class USBRobotGamepadApp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mControllerLabel)
-                    .addComponent(jLabel1))
-                .addContainerGap(244, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mControllerLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mControllerComboBox, 0, 325, Short.MAX_VALUE))
+                    .addComponent(mControllerModelLabel))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mControllerLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mControllerLabel)
+                    .addComponent(mControllerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addComponent(mControllerModelLabel)
+                .addContainerGap(228, Short.MAX_VALUE))
         );
 
         pack();
@@ -177,15 +190,15 @@ public class USBRobotGamepadApp extends javax.swing.JFrame {
     }//GEN-LAST:event_mCharacterizeMenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem mCharacterizeMenuItem;
+    private javax.swing.JComboBox mControllerComboBox;
     private javax.swing.JLabel mControllerLabel;
+    private javax.swing.JLabel mControllerModelLabel;
     private javax.swing.JMenu mEditMenu;
     private javax.swing.JMenuItem mExitMenuItem;
     private javax.swing.JMenu mFileMenu;
     private javax.swing.JMenuItem mJinputVersionMenuItem;
     private javax.swing.JMenuBar mMenuBar;
-    private javax.swing.JMenuItem mSelectControllerMenuItem;
     // End of variables declaration//GEN-END:variables
 
     private static void setLookAndFeel(){
@@ -200,6 +213,19 @@ public class USBRobotGamepadApp extends javax.swing.JFrame {
             Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof USBRobotGamepadAppModel){
+            USBRobotGamepadAppModel model = (USBRobotGamepadAppModel)o;
+            Controller[] controllers = model.getAvailableControllers();
+            List<String> controllerNames = new ArrayList<String>();
+            for (Controller c : controllers){
+                controllerNames.add(c.getName());
+            }
+            mControllerComboBox.setModel(new DefaultComboBoxModel(controllerNames.toArray(new String[0])));
         }
     }
 
