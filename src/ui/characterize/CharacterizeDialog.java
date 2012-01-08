@@ -32,6 +32,8 @@ public class CharacterizeDialog extends javax.swing.JDialog {
         initComponents();
         
         initGamepads();
+        gamepadTable.setModel(new CharacterizeTableModel());
+        
     }
 
     /** This method is called from within the constructor to
@@ -114,7 +116,7 @@ public class CharacterizeDialog extends javax.swing.JDialog {
         Controller c = nameToControllerMap.get(gamepadComboBox.getSelectedItem().toString());
         Component[] components = c.getComponents();
         for (Component cmp : components){
-            System.out.println(cmp.getName());
+            ((CharacterizeTableModel)gamepadTable.getModel()).addControllerComponent(cmp);
         }
     }//GEN-LAST:event_characterizeButtonActionPerformed
 
@@ -136,14 +138,5 @@ public class CharacterizeDialog extends javax.swing.JDialog {
             }
         }
         gamepadComboBox.setModel(new DefaultComboBoxModel(nameToControllerMap.keySet().toArray(new String[0])));
-    }
-    
-    
-    
-    private void joystickTests(){
-        ControllerEnvironment env = ControllerEnvironment.getDefaultEnvironment();
-        Controller[] controllers = env.getControllers();
-        
-        System.out.println("Debug");
     }
 }
