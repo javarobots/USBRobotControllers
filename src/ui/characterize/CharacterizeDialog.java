@@ -10,6 +10,8 @@
  */
 package ui.characterize;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
@@ -25,6 +27,7 @@ import net.java.games.input.ControllerEnvironment;
 public class CharacterizeDialog extends javax.swing.JDialog {
     
     private Map<String,Controller> nameToControllerMap;
+    private CharacterizeThread mCharacterizeThread;
 
     /** Creates new form CharacterizeDialog */
     public CharacterizeDialog(java.awt.Frame parent, boolean modal) {
@@ -32,8 +35,16 @@ public class CharacterizeDialog extends javax.swing.JDialog {
         initComponents();
         
         initGamepads();
-        gamepadTable.setModel(new CharacterizeTableModel());
+        mGamepadTable.setModel(new CharacterizeTableModel());
         
+        this.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                if (mCharacterizeThread != null){
+                    mCharacterizeThread.stopThread(true);
+                }
+            }
+        });        
     }
 
     /** This method is called from within the constructor to
@@ -45,24 +56,24 @@ public class CharacterizeDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        gamepadLabel = new javax.swing.JLabel();
-        gamepadComboBox = new javax.swing.JComboBox();
-        characterizeButton = new javax.swing.JButton();
-        scrollPane = new javax.swing.JScrollPane();
-        gamepadTable = new javax.swing.JTable();
+        mGamepadLabel = new javax.swing.JLabel();
+        mGamepadComboBox = new javax.swing.JComboBox();
+        mCharacterizeButton = new javax.swing.JButton();
+        mScrollPane = new javax.swing.JScrollPane();
+        mGamepadTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        gamepadLabel.setText("Gamepad:");
+        mGamepadLabel.setText("Gamepad:");
 
-        characterizeButton.setText("Characterize");
-        characterizeButton.addActionListener(new java.awt.event.ActionListener() {
+        mCharacterizeButton.setText("Characterize");
+        mCharacterizeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                characterizeButtonActionPerformed(evt);
+                mCharacterizeButtonActionPerformed(evt);
             }
         });
 
-        gamepadTable.setModel(new javax.swing.table.DefaultTableModel(
+        mGamepadTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -78,7 +89,7 @@ public class CharacterizeDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        scrollPane.setViewportView(gamepadTable);
+        mScrollPane.setViewportView(mGamepadTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,13 +98,13 @@ public class CharacterizeDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                    .addComponent(mScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(gamepadLabel)
+                        .addComponent(mGamepadLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(gamepadComboBox, 0, 325, Short.MAX_VALUE)
+                        .addComponent(mGamepadComboBox, 0, 325, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(characterizeButton)))
+                        .addComponent(mCharacterizeButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -101,31 +112,34 @@ public class CharacterizeDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gamepadLabel)
-                    .addComponent(gamepadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(characterizeButton))
+                    .addComponent(mGamepadLabel)
+                    .addComponent(mGamepadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mCharacterizeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane)
+                .addComponent(mScrollPane)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void characterizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_characterizeButtonActionPerformed
-        Controller c = nameToControllerMap.get(gamepadComboBox.getSelectedItem().toString());
+    private void mCharacterizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mCharacterizeButtonActionPerformed
+        Controller c = nameToControllerMap.get(mGamepadComboBox.getSelectedItem().toString());
         Component[] components = c.getComponents();
         for (Component cmp : components){
-            ((CharacterizeTableModel)gamepadTable.getModel()).addControllerComponent(cmp);
+            ((CharacterizeTableModel)mGamepadTable.getModel()).addControllerComponent(cmp);
         }
-    }//GEN-LAST:event_characterizeButtonActionPerformed
+        mCharacterizeThread = new CharacterizeThread(c, (CharacterizeTableModel)mGamepadTable.getModel());
+        Thread t = new Thread(mCharacterizeThread);
+        t.start();
+    }//GEN-LAST:event_mCharacterizeButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton characterizeButton;
-    private javax.swing.JComboBox gamepadComboBox;
-    private javax.swing.JLabel gamepadLabel;
-    private javax.swing.JTable gamepadTable;
-    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JButton mCharacterizeButton;
+    private javax.swing.JComboBox mGamepadComboBox;
+    private javax.swing.JLabel mGamepadLabel;
+    private javax.swing.JTable mGamepadTable;
+    private javax.swing.JScrollPane mScrollPane;
     // End of variables declaration//GEN-END:variables
 
     private void initGamepads() {
@@ -137,6 +151,6 @@ public class CharacterizeDialog extends javax.swing.JDialog {
                 nameToControllerMap.put(c.getName(), c);
             }
         }
-        gamepadComboBox.setModel(new DefaultComboBoxModel(nameToControllerMap.keySet().toArray(new String[0])));
+        mGamepadComboBox.setModel(new DefaultComboBoxModel(nameToControllerMap.keySet().toArray(new String[0])));
     }
 }
