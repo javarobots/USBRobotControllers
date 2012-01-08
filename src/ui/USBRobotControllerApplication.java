@@ -84,8 +84,9 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
+        characterizeMenuItem = new javax.swing.JMenu();
         selectControllerMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Robot Controller");
@@ -104,12 +105,20 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setText("Edit");
+        characterizeMenuItem.setText("Edit");
 
         selectControllerMenuItem.setText("Select Controller");
-        editMenu.add(selectControllerMenuItem);
+        characterizeMenuItem.add(selectControllerMenuItem);
 
-        menuBar.add(editMenu);
+        jMenuItem1.setText("Characterize Controller...");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        characterizeMenuItem.add(jMenuItem1);
+
+        menuBar.add(characterizeMenuItem);
 
         setJMenuBar(menuBar);
 
@@ -137,11 +146,18 @@ public class USBRobotControllerApplication extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        CharacterizeDialog dialog = new CharacterizeDialog(this, true);
+        ComponentPosition.centerFrame(dialog);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu editMenu;
+    private javax.swing.JMenu characterizeMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem selectControllerMenuItem;
     // End of variables declaration//GEN-END:variables
