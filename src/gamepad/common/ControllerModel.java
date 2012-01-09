@@ -14,6 +14,6 @@ public interface ControllerModel {
     
     String generateCommand();
     
-    String getControllerName();
+    String getModelName();
     
 }
