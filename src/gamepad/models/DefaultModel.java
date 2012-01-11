@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author Parham
  */
-public class TestModel implements ControllerModel {
+public class DefaultModel implements ControllerModel {
     
     private List<GamepadFunction> mFunctions;
     
-    public TestModel(){
+    public DefaultModel(){
         mFunctions = new ArrayList<GamepadFunction>();
     }
 
@@ -28,16 +28,11 @@ public class TestModel implements ControllerModel {
 
     @Override
     public String generateCommand() {
-        StringBuilder commandBuilder = new StringBuilder("$ROBCNT");
+        StringBuilder commandBuilder = new StringBuilder("$CNT");
         for (GamepadFunction gf : mFunctions){
             commandBuilder.append(",").append(Float.toString(gf.evaluateFunction()));
         }
         return commandBuilder.toString();
-    }
-
-    @Override
-    public String getModelName() {
-        return "Test Model";
     }
     
 }

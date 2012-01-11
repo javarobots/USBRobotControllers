@@ -26,12 +26,15 @@ import net.java.games.input.Controller;
 import net.java.games.input.Version;
 import ui.installation.JinputInstallationFrame;
 import ui.installation.RxtxInstallationFrame;
+import configuration.Configuration;
 
 /**
  *
  * @author Parham
  */
 public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
+    
+    private static USBRobotGamepadAppController mController;
 
     /**
      * @param args the command line arguments
@@ -43,12 +46,15 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
                 public void run() {
                     //Center the frame and set look and feel
                     setLookAndFeel();
+                    //Perform cofiguration checks
+                    Configuration.getInstance().configurationChecks();
+                    //Instamtiate the application
                     USBRobotGamepadApp gamepadApp = new USBRobotGamepadApp();
                     USBRobotGamepadAppModel model = new USBRobotGamepadAppModel();
                     model.addObserver(gamepadApp);
                     model.initModel();
                     model.notifyObservers();
-                    USBRobotGamepadAppController controller = new USBRobotGamepadAppController(model);
+                    mController = new USBRobotGamepadAppController(model);
                     ComponentPosition.centerFrame(gamepadApp);
                     gamepadApp.setVisible(true);
                 }
@@ -97,6 +103,11 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         mControllerLabel = new javax.swing.JLabel();
         mControllerModelLabel = new javax.swing.JLabel();
         mControllerComboBox = new javax.swing.JComboBox();
+        mModelsComboBox = new javax.swing.JComboBox();
+        mScrollPane = new javax.swing.JScrollPane();
+        mOutputTextArea = new javax.swing.JTextArea();
+        mStopButton = new javax.swing.JButton();
+        mStartButton = new javax.swing.JButton();
         mMenuBar = new javax.swing.JMenuBar();
         mFileMenu = new javax.swing.JMenu();
         mExitMenuItem = new javax.swing.JMenuItem();
@@ -109,7 +120,20 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
 
         mControllerLabel.setText("Controller:");
 
-        mControllerModelLabel.setText("Controller Model: Not Selected");
+        mControllerModelLabel.setText("Controller Model:");
+
+        mOutputTextArea.setColumns(20);
+        mOutputTextArea.setRows(5);
+        mScrollPane.setViewportView(mOutputTextArea);
+
+        mStopButton.setText("Stop");
+
+        mStartButton.setText("Start");
+        mStartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mStartButtonActionPerformed(evt);
+            }
+        });
 
         mFileMenu.setText("File");
 
@@ -149,16 +173,27 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(mScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(mControllerLabel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mControllerModelLabel)
+                            .addComponent(mControllerLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mControllerComboBox, 0, 325, Short.MAX_VALUE))
-                    .addComponent(mControllerModelLabel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mModelsComboBox, 0, 294, Short.MAX_VALUE)
+                            .addComponent(mControllerComboBox, 0, 294, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mStartButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mStopButton)))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {mStartButton, mStopButton});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -167,8 +202,16 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
                     .addComponent(mControllerLabel)
                     .addComponent(mControllerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mControllerModelLabel)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mControllerModelLabel)
+                    .addComponent(mModelsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mStopButton)
+                    .addComponent(mStartButton))
+                .addContainerGap())
         );
 
         pack();
@@ -189,6 +232,10 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         dialog.setVisible(true);
     }//GEN-LAST:event_mCharacterizeMenuItemActionPerformed
 
+    private void mStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mStartButtonActionPerformed
+        mController.startGamepadThread(mControllerComboBox.getSelectedItem().toString(),mModelsComboBox.getSelectedItem().toString());
+    }//GEN-LAST:event_mStartButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem mCharacterizeMenuItem;
     private javax.swing.JComboBox mControllerComboBox;
@@ -199,6 +246,11 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
     private javax.swing.JMenu mFileMenu;
     private javax.swing.JMenuItem mJinputVersionMenuItem;
     private javax.swing.JMenuBar mMenuBar;
+    private javax.swing.JComboBox mModelsComboBox;
+    private javax.swing.JTextArea mOutputTextArea;
+    private javax.swing.JScrollPane mScrollPane;
+    private javax.swing.JButton mStartButton;
+    private javax.swing.JButton mStopButton;
     // End of variables declaration//GEN-END:variables
 
     private static void setLookAndFeel(){
@@ -220,13 +272,23 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
     public void update(Observable o, Object arg) {
         if (o instanceof USBRobotGamepadAppModel){
             USBRobotGamepadAppModel model = (USBRobotGamepadAppModel)o;
+            
+            //Get available controllers
             Controller[] controllers = model.getAvailableControllers();
             List<String> controllerNames = new ArrayList<String>();
             for (Controller c : controllers){
                 controllerNames.add(c.getName());
             }
             mControllerComboBox.setModel(new DefaultComboBoxModel(controllerNames.toArray(new String[0])));
-        }
+            
+            //Get available model classes
+            List<Class> availableModels = model.getAvailableClasses();
+            String[] names = new String[availableModels.size()];
+            int index = 0;
+            for (Class c : availableModels){
+                names[index++] = c.getName();
+            }
+            mModelsComboBox.setModel(new DefaultComboBoxModel(names));
+        }    
     }
-
 }
