@@ -5,6 +5,7 @@
 package configuration;
 
 import java.io.File;
+import util.ResourceCopier;
 
 /**
  *
@@ -49,6 +50,19 @@ public class Configuration {
         File configurationDirectory = new File(userHome + CONFIGURATION_DIRECTORY);
         if (!configurationDirectory.exists()){
             configurationDirectory.mkdirs();
+        }
+        
+        //Check for template .xml file        
+        boolean templateExists = false;
+        for (File f :configurationDirectory.listFiles()){
+            if (f.getName().equals("TemplateFile")){
+                templateExists = true;
+            }
+        }
+        if (!templateExists){
+            ResourceCopier copier = new ResourceCopier("gamepad/xml/TemplateFile.xml", configurationDirectory.toString() + "/Template.xml");
+            copier.copyFile();
+            ConsoleOutput.outToConsole("TemplateFile.xml copied");
         }
     }
     

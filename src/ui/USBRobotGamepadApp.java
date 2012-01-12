@@ -27,6 +27,9 @@ import net.java.games.input.Version;
 import ui.installation.JinputInstallationFrame;
 import ui.installation.RxtxInstallationFrame;
 import configuration.Configuration;
+import java.io.File;
+import org.jdom.Element;
+import util.xml.JdomDocumentReader;
 
 /**
  *
@@ -122,13 +125,21 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
 
         mControllerModelLabel.setText("Controller Model:");
 
+        mControllerComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mControllerComboBoxActionPerformed(evt);
+            }
+        });
+
         mOutputTextArea.setColumns(20);
         mOutputTextArea.setRows(5);
         mScrollPane.setViewportView(mOutputTextArea);
 
         mStopButton.setText("Stop");
+        mStopButton.setEnabled(false);
 
         mStartButton.setText("Start");
+        mStartButton.setEnabled(false);
         mStartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mStartButtonActionPerformed(evt);
@@ -236,6 +247,17 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         mController.startGamepadThread(mControllerComboBox.getSelectedItem().toString(),mModelsComboBox.getSelectedItem().toString());
     }//GEN-LAST:event_mStartButtonActionPerformed
 
+    private void mControllerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mControllerComboBoxActionPerformed
+        if (!mControllerComboBox.getSelectedItem().toString().equals("No Controllers Available")){
+            mStartButton.setEnabled(true);
+            mStopButton.setEnabled(true);
+        }
+        else {
+            mStartButton.setEnabled(false);
+            mStopButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_mControllerComboBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem mCharacterizeMenuItem;
     private javax.swing.JComboBox mControllerComboBox;
@@ -279,14 +301,20 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
             for (Controller c : controllers){
                 controllerNames.add(c.getName());
             }
+            if (controllers.length == 0){
+                controllerNames.add("No Controllers Available");
+            }
             mControllerComboBox.setModel(new DefaultComboBoxModel(controllerNames.toArray(new String[0])));
             
             //Get available model classes
-            List<Class> availableModels = model.getAvailableClasses();
-            String[] names = new String[availableModels.size()];
+            File[] xmlFiles = Configuration.getInstance().getApplicationDirectory().listFiles();
             int index = 0;
-            for (Class c : availableModels){
-                names[index++] = c.getName();
+            String[] names = new String[xmlFiles.length];
+            for (File f : xmlFiles){
+                JdomDocumentReader reader = new JdomDocumentReader(f);
+                Element root = reader.initAndGetRoot();
+                Element modelElement = root.getChild("model");
+                names[index++] = modelElement.getText();
             }
             mModelsComboBox.setModel(new DefaultComboBoxModel(names));
         }    
