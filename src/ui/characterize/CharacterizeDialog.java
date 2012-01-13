@@ -18,7 +18,6 @@ import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
-import net.java.games.input.Controller.Type;
 import util.jinput.JinputUtilities;
 
 /**
@@ -148,7 +147,7 @@ public class CharacterizeDialog extends javax.swing.JDialog {
         nameToControllerMap = new HashMap<String,Controller>();
         List<Controller> controllers = JinputUtilities.availableGamepads();
         for (Controller c : controllers){
-            if (c.getType() == Type.GAMEPAD){
+            if (c.getType() == net.java.games.input.Controller.Type.GAMEPAD){
                 nameToControllerMap.put(c.getName(), c);
             }
         }

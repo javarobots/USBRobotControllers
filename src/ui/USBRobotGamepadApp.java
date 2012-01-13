@@ -10,11 +10,12 @@
  */
 package ui;
 
-import java.util.Observable;
-import ui.characterize.CharacterizeDialog;
 import commonutilities.swing.ComponentPosition;
+import configuration.Configuration;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,11 +25,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import net.java.games.input.Controller;
 import net.java.games.input.Version;
+import org.jdom.Element;
+import ui.characterize.CharacterizeDialog;
 import ui.installation.JinputInstallationFrame;
 import ui.installation.RxtxInstallationFrame;
-import configuration.Configuration;
-import java.io.File;
-import org.jdom.Element;
 import util.xml.JdomDocumentReader;
 
 /**
