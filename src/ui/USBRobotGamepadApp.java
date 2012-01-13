@@ -38,6 +38,7 @@ import util.xml.JdomDocumentReader;
 public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
     
     private static USBRobotGamepadAppController mController;
+    private String mFirstListEntry = "No Controller Selected";
 
     /**
      * @param args the command line arguments
@@ -248,7 +249,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_mStartButtonActionPerformed
 
     private void mControllerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mControllerComboBoxActionPerformed
-        if (!mControllerComboBox.getSelectedItem().toString().equals("No Controllers Available")){
+        if (!mControllerComboBox.getSelectedItem().toString().equals(mFirstListEntry)){
             mStartButton.setEnabled(true);
             mStopButton.setEnabled(true);
         }
@@ -298,12 +299,10 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
             //Get available controllers
             Controller[] controllers = model.getAvailableControllers();
             List<String> controllerNames = new ArrayList<String>();
+            controllerNames.add(mFirstListEntry);
             for (Controller c : controllers){
                 controllerNames.add(c.getName());
-            }
-            if (controllers.length == 0){
-                controllerNames.add("No Controllers Available");
-            }
+            }                
             mControllerComboBox.setModel(new DefaultComboBoxModel(controllerNames.toArray(new String[0])));
             
             //Get available model classes

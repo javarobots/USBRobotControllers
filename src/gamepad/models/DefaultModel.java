@@ -19,6 +19,7 @@ public class DefaultModel implements ControllerModel {
     
     public DefaultModel(){
         mFunctions = new ArrayList<GamepadFunction>();
+        System.out.println("DefaultModel instantiated.");
     }
 
     @Override
