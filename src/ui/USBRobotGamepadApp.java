@@ -133,6 +133,11 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
 
         mStopButton.setText("Stop");
         mStopButton.setEnabled(false);
+        mStopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mStopButtonActionPerformed(evt);
+            }
+        });
 
         mStartButton.setText("Start");
         mStartButton.setEnabled(false);
@@ -254,6 +259,10 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         }
     }//GEN-LAST:event_mControllerComboBoxActionPerformed
 
+    private void mStopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mStopButtonActionPerformed
+        mController.stopThread();
+    }//GEN-LAST:event_mStopButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem mCharacterizeMenuItem;
     private javax.swing.JComboBox mControllerComboBox;
@@ -298,14 +307,13 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
             for (Controller c : controllers){
                 controllerNames.add(c.getName());
             }                
-            mControllerComboBox.setModel(new DefaultComboBoxModel(controllerNames.toArray(new String[0])));
-            
+            mControllerComboBox.setModel(new DefaultComboBoxModel(controllerNames.toArray(new String[0])));            
             //Get available model classes
-            Map<String,File> modelToFileMap = model.getModelNameToFileName();
+            Map<File,String> modelToFileMap = model.getModelNameToFileName();
             String[] comboBoxNames = new String[modelToFileMap.size()];
             int indexVal = 0;
-            for (String modelName : modelToFileMap.keySet()){
-                comboBoxNames[indexVal++] = modelName + "-" + modelToFileMap.get(modelName).getName();
+            for (File file : modelToFileMap.keySet()){
+                comboBoxNames[indexVal++] = modelToFileMap.get(file) + "-" + file.getName();
             }
             mModelsComboBox.setModel(new DefaultComboBoxModel(comboBoxNames));
         }    
