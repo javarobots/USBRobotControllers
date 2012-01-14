@@ -147,10 +147,11 @@ public class CharacterizeDialog extends javax.swing.JDialog {
         nameToControllerMap = new HashMap<String,Controller>();
         List<Controller> controllers = JinputUtilities.availableGamepads();
         for (Controller c : controllers){
-            if (c.getType() == net.java.games.input.Controller.Type.GAMEPAD){
+            if (c.getType() == Controller.Type.GAMEPAD){
                 nameToControllerMap.put(c.getName(), c);
             }
         }
-        mGamepadComboBox.setModel(new DefaultComboBoxModel(nameToControllerMap.keySet().toArray(new String[0])));
+        String[] values = nameToControllerMap.keySet().toArray(new String[0]);
+        mGamepadComboBox.setModel(new DefaultComboBoxModel(values));
     }
 }

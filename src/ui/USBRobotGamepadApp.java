@@ -13,10 +13,7 @@ package ui;
 import commonutilities.swing.ComponentPosition;
 import configuration.Configuration;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -25,11 +22,9 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import net.java.games.input.Controller;
 import net.java.games.input.Version;
-import org.jdom.Element;
 import ui.characterize.CharacterizeDialog;
 import ui.installation.JinputInstallationFrame;
 import ui.installation.RxtxInstallationFrame;
-import util.xml.JdomDocumentReader;
 
 /**
  *
@@ -306,16 +301,13 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
             mControllerComboBox.setModel(new DefaultComboBoxModel(controllerNames.toArray(new String[0])));
             
             //Get available model classes
-            File[] xmlFiles = Configuration.getInstance().getApplicationDirectory().listFiles();
-            int index = 0;
-            String[] names = new String[xmlFiles.length];
-            for (File f : xmlFiles){
-                JdomDocumentReader reader = new JdomDocumentReader(f);
-                Element root = reader.initAndGetRoot();
-                Element modelElement = root.getChild("model");
-                names[index++] = modelElement.getText();
+            Map<String,File> modelToFileMap = model.getModelNameToFileName();
+            String[] comboBoxNames = new String[modelToFileMap.size()];
+            int indexVal = 0;
+            for (String modelName : modelToFileMap.keySet()){
+                comboBoxNames[indexVal++] = modelName + "-" + modelToFileMap.get(modelName).getName();
             }
-            mModelsComboBox.setModel(new DefaultComboBoxModel(names));
+            mModelsComboBox.setModel(new DefaultComboBoxModel(comboBoxNames));
         }    
     }
 }

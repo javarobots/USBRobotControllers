@@ -8,6 +8,8 @@ import gamepad.common.ControllerModel;
 import gamepad.common.GamepadThread;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.java.games.input.Controller;
+import util.jinput.JinputUtilities;
 
 /**
  *
@@ -26,10 +28,14 @@ public class USBRobotGamepadAppController {
         
     }
 
-    void startGamepadThread(String controllerName, String modelClassName) {
+    void startGamepadThread(String controllerName, String modelClassAndFileName) {
         try {
-            System.out.println(controllerName + " starting with model: " + modelClassName);
-            ControllerModel m = (ControllerModel) Class.forName("gamepad.models.DefaultModel").newInstance();
+            String[] splitClassAndFile = modelClassAndFileName.split("-");
+            ControllerModel m = (ControllerModel) Class.forName(splitClassAndFile[0]).newInstance();
+            Controller gameController = JinputUtilities.getControllerByName(controllerName);
+            
+            
+            System.out.println("debug");
         } catch (InstantiationException ex) {
             Logger.getLogger(USBRobotGamepadAppController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
