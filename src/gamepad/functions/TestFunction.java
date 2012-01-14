@@ -14,17 +14,20 @@ import net.java.games.input.Component;
  */
 public class TestFunction extends AbstractComponentFunction {
 
-    public TestFunction(Component c){
-        super(c);
+    public TestFunction(){
+        super();
+    }
+    
+    @Override
+    public void setComponent(Component c){
+        this.mComponent = c;
     }
     
     @Override
     public float evaluateFunction() {
         float readValue = mComponent.getPollData();
-        
         //Create your custom function here
-        float calculatedValue = readValue * 100;
-        
+        float calculatedValue = readValue * 100;        
         return calculatedValue;
     }
     
