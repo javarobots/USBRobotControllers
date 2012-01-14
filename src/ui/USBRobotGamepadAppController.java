@@ -67,6 +67,7 @@ public class USBRobotGamepadAppController {
             }
             //Set up the thread
             GamepadThread gt = new GamepadThread(controllerModel);
+            gt.setApplicationModel(mModel);
             mModel.setThread(gt);
             Thread t = new Thread(gt);
             t.start();

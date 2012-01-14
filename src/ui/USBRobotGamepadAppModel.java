@@ -26,6 +26,7 @@ public class USBRobotGamepadAppModel extends Observable {
     private Controller[] mAvailableControllers;
     private Map<File,String> mModelNameToFileName;
     private GamepadThread mThread;
+    private String mCommandString = "";
     
     public void initModel(){
         List<Controller> availableControllers = JinputUtilities.availableGamepads();
@@ -65,6 +66,15 @@ public class USBRobotGamepadAppModel extends Observable {
 
     public void setThread(GamepadThread mThread) {
         this.mThread = mThread;
+    }
+
+    public String getCommandString() {
+        return mCommandString;
+    }
+
+    public void setCommandString(String mCommandString) {
+        this.mCommandString = mCommandString;
+        setChanged();
     }
     
     

@@ -6,6 +6,8 @@ package gamepad.common;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ui.USBRobotGamepadApp;
+import ui.USBRobotGamepadAppModel;
 
 /**
  *
@@ -15,6 +17,7 @@ public class GamepadThread implements Runnable {
     
     private boolean mStopThread = false;
     private ControllerModel mModel;
+    private USBRobotGamepadAppModel mApplicationModel;
 
     public GamepadThread(ControllerModel model){
         mModel = model;
@@ -26,7 +29,8 @@ public class GamepadThread implements Runnable {
         while (!mStopThread){
             try {
                 String cmd = mModel.generateCommand();
-                System.out.println(cmd);
+                mApplicationModel.setCommandString(cmd);
+                mApplicationModel.notifyObservers();
                 Thread.sleep(250);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GamepadThread.class.getName()).log(Level.SEVERE, null, ex);
@@ -37,5 +41,8 @@ public class GamepadThread implements Runnable {
     public void stopThread(boolean b){
         mStopThread = b;
     }
-    
+
+    public void setApplicationModel(USBRobotGamepadAppModel mApplicationModel) {
+        this.mApplicationModel = mApplicationModel;
+    }
 }
