@@ -4,6 +4,8 @@
  */
 package gamepad.common;
 
+import net.java.games.input.Component;
+
 /**
  *
  * @author Parham
@@ -11,5 +13,7 @@ package gamepad.common;
 public interface GamepadFunction {
     
     float evaluateFunction();
+    
+    void setComponent(Component c);
     
 }
