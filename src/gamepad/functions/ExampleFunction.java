@@ -8,13 +8,16 @@ import gamepad.common.AbstractComponentFunction;
 import net.java.games.input.Component;
 
 /**
- * A simple test function used to demonstrate
- * the use of functions for a game pads
+ * A simple example function used to demonstrate
+ * the use of functions for a game pads.
+ * 
+ * This function takes the value read and multiplies it by 100
+ * 
  * @author Parham
  */
-public class TestFunction extends AbstractComponentFunction {
+public class ExampleFunction extends AbstractComponentFunction {
 
-    public TestFunction(){
+    public ExampleFunction(){
         super();
     }
     

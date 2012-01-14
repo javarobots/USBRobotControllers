@@ -6,11 +6,11 @@ package gamepad.common;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ui.USBRobotGamepadApp;
 import ui.USBRobotGamepadAppModel;
 
 /**
- *
+ * A Thread that runs continuously generating the
+ * joystick command string
  * @author Parham
  */
 public class GamepadThread implements Runnable {
@@ -38,10 +38,19 @@ public class GamepadThread implements Runnable {
         }
     }
     
+    /**
+     * Stop the thread from running
+     * @param b - true to stop
+     */
     public void stopThread(boolean b){
         mStopThread = b;
     }
 
+    /**
+     * Set the application model. This model holds
+     * information specific to the application UI
+     * @param mApplicationModel -the application model
+     */
     public void setApplicationModel(USBRobotGamepadAppModel mApplicationModel) {
         this.mApplicationModel = mApplicationModel;
     }

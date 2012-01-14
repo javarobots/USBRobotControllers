@@ -21,7 +21,10 @@ import net.java.games.input.Controller;
 import util.jinput.JinputUtilities;
 
 /**
- *
+ * A dialog class that can be opened to characterize and
+ * unknown USB controller. This allows the user to see
+ * what components the controller has as well as its output
+ * values
  * @author Parham
  */
 public class CharacterizeDialog extends javax.swing.JDialog {

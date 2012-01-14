@@ -10,18 +10,14 @@
  */
 package ui.installation;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * A frame which allows you to select where to extract the Jinput files
  * @author Parham
  */
 public class JinputInstallationFrame extends javax.swing.JFrame {
@@ -174,28 +170,25 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
     private javax.swing.JButton mSelectButton;
     // End of variables declaration//GEN-END:variables
 
-    private void performCopy(){
-        
+    private void performCopy(){       
+        //The files for Jinput
         String[] bitFiles_32 = {"jinput-dx8.dll","jinput-raw.dll","jinput-wintab.dll"};
-        String[] bitFiles_64 = {"jinput-dx8_64.dll","jinput-raw_64.dll","jinput-wintab.dll"};
-        
-        
+        String[] bitFiles_64 = {"jinput-dx8_64.dll","jinput-raw_64.dll","jinput-wintab.dll"};       
         //Copy the resource files to the designated directory
-        try {
-            
+        try {            
             if (mRadioButton_32Bit.isSelected()){
                 for (String s : bitFiles_32){
                     //Create streams for copying serial file
                     InputStream in = this.getClass().getClassLoader().getResourceAsStream("resources/jinput/" + s);
                     OutputStream out = new FileOutputStream(mDirectoryTextField.getText() + "/" + s);
-
+                    
                     //Create copy buffer and copy file
                     byte[] buffer = new byte[1024];
                     int len;
                     while ((len = in.read(buffer)) > 0){
                         out.write(buffer);
                     }
-
+                    
                     //Close streams
                     in.close();
                     out.close();

@@ -4,6 +4,7 @@
  */
 package gamepad.models;
 
+import configuration.ConsoleOutput;
 import gamepad.common.ControllerModel;
 import gamepad.common.GamepadFunction;
 import java.util.ArrayList;
@@ -11,7 +12,12 @@ import java.util.List;
 import net.java.games.input.Controller;
 
 /**
- *
+ * The default Gamepad model. This model build command
+ * string using $CNT has it's message header and comma
+ * delimits function values
+ * 
+ * e.g. $CNT,123,456
+ * 
  * @author Parham
  */
 public class DefaultModel implements ControllerModel {
@@ -21,7 +27,7 @@ public class DefaultModel implements ControllerModel {
     
     public DefaultModel(){
         mFunctions = new ArrayList<GamepadFunction>();
-        System.out.println("DefaultModel instantiated.");
+       ConsoleOutput.outToConsole("DefaultModel instantiated.");
     }
     
     @Override
@@ -36,7 +42,9 @@ public class DefaultModel implements ControllerModel {
 
     @Override
     public String generateCommand() {
+        //Poll the controller obtaining new values
         mController.poll();
+        //Build the command
         StringBuilder commandBuilder = new StringBuilder("$CNT");
         for (GamepadFunction gf : mFunctions){
             commandBuilder.append(",").append(Float.toString(gf.evaluateFunction()));

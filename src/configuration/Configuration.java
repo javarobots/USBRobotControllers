@@ -8,13 +8,14 @@ import java.io.File;
 import util.ResourceCopier;
 
 /**
- *
+ * A singleton class for configuring common parameters
+ * used throughout the application. 
  * @author Parham
  */
 public class Configuration {
     
     private static Configuration instance = null;
-    private String userHome;
+    private String mUserHome;
     public static final int OPEN_COMM_PAUSE = 2500;
     public static final String CONFIGURATION_DIRECTORY = "/USBController";
     public static final boolean OUTPUT_TO_CONSOLE = true;
@@ -40,14 +41,14 @@ public class Configuration {
     public void configurationChecks(){        
         //Determine OS
         if (isWindows()){
-            userHome = System.getenv("USERPROFILE");
+            mUserHome = System.getenv("USERPROFILE");
         }
         else {
-            userHome = System.getenv("HOME");
+            mUserHome = System.getenv("HOME");
         }
         
         //Check for configuration directory and create if necessary
-        File configurationDirectory = new File(userHome + CONFIGURATION_DIRECTORY);
+        File configurationDirectory = new File(mUserHome + CONFIGURATION_DIRECTORY);
         if (!configurationDirectory.exists()){
             configurationDirectory.mkdirs();
         }
@@ -66,12 +67,22 @@ public class Configuration {
         }
     }
     
+    /**
+     * Get the String path of the users home directory.
+     * This return a OS dependent path.
+     * @return the users home directory path
+     */
     public String getSystemHome(){
-        return userHome;
+        return mUserHome;
     }
     
+    /**
+     * The directory path where model .xml 
+     * files are written
+     * @return the application directory path
+     */
     public File getApplicationDirectory(){
-        return new File(userHome + CONFIGURATION_DIRECTORY);
+        return new File(mUserHome + CONFIGURATION_DIRECTORY);
     }
     
     /**

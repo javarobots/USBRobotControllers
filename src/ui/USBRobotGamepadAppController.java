@@ -22,23 +22,27 @@ import util.jinput.JinputUtilities;
 import util.xml.JdomDocumentReader;
 
 /**
- *
+ * Controller class for the main application.
+ * This class allows logic the be separated
+ * from the view.
  * @author Parham
  */
 public class USBRobotGamepadAppController {
     
     private USBRobotGamepadAppModel mModel;
-    private GamepadThread mThread;
     
     public USBRobotGamepadAppController(USBRobotGamepadAppModel model){
         mModel = model;
     }
-    
-    public void setSelectedController(){
-        
-    }
 
-    void startGamepadThread(String controllerName, String modelClassAndFileName) {
+    /**
+     * Starts the Gamepad thread. The selected Gamepad controller
+     * is obtained and all mapped functions instantiated.
+     * @param controllerName - The name of the controller
+     * @param modelClassAndFileName - The name of the model class
+     * and its .xml file
+     */
+    public void startGamepadThread(String controllerName, String modelClassAndFileName) {
         try {
             //Split the model and filename into separate Strings
             String[] splitClassAndFile = modelClassAndFileName.split("-");
@@ -80,7 +84,10 @@ public class USBRobotGamepadAppController {
         }
     }
 
-    void stopThread() {
+    /**
+     * Stop the Gamepad thread
+     */
+    public void stopThread() {
         mModel.getThread().stopThread(true);
     }
     

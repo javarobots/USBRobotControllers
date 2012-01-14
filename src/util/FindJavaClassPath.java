@@ -5,8 +5,10 @@
 package util;
 
 /**
- *
- * @author mnord
+ * A class that can be used to display the Java library path.
+ * This path should contain location of where supporting .dll
+ * files are saved.
+ * @author Parham
  */
 public class FindJavaClassPath {
    

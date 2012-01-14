@@ -10,18 +10,15 @@
  */
 package ui.installation;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * An installation frame that allows you to choose where
+ * to extract RxTx files.
  * @author Parham
  */
 public class RxtxInstallationFrame extends javax.swing.JFrame {

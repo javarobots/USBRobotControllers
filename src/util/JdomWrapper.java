@@ -8,7 +8,7 @@ import java.util.List;
 import org.jdom.Element;
 
 /**
- * A wrapper to allow a single place to suppress
+ * A wrapper allowing a single place to suppress
  * unchecked conversions in JDOM classes
  * @author Parham
  */

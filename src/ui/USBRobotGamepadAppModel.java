@@ -17,7 +17,7 @@ import util.jinput.JinputUtilities;
 import util.xml.JdomDocumentReader;
 
 /**
- *
+ * The model class for application UI
  * @author Parham
  */
 public class USBRobotGamepadAppModel extends Observable {
@@ -28,6 +28,9 @@ public class USBRobotGamepadAppModel extends Observable {
     private GamepadThread mThread;
     private String mCommandString = "";
     
+    /**
+     * Initialize the model
+     */
     public void initModel(){
         List<Controller> availableControllers = JinputUtilities.availableGamepads();
         mAvailableControllers = availableControllers.toArray(new Controller[0]);        
@@ -42,7 +45,7 @@ public class USBRobotGamepadAppModel extends Observable {
         }
         setChanged();
     }
-
+    
     public Controller getSelectedController() {
         return mSelectedController;
     }
@@ -76,7 +79,5 @@ public class USBRobotGamepadAppModel extends Observable {
         this.mCommandString = mCommandString;
         setChanged();
     }
-    
-    
     
 }

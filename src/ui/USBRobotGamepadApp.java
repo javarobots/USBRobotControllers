@@ -27,7 +27,7 @@ import ui.installation.JinputInstallationFrame;
 import ui.installation.RxtxInstallationFrame;
 
 /**
- *
+ * The main controller application
  * @author Parham
  */
 public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {

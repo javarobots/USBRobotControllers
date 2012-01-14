@@ -8,7 +8,8 @@ import net.java.games.input.Component;
 import net.java.games.input.Controller;
 
 /**
- *
+ * A thread that runs collecting raw data from the
+ * USB controller
  * @author Parham
  */
 public class CharacterizeThread implements Runnable {
@@ -35,6 +36,10 @@ public class CharacterizeThread implements Runnable {
         System.out.println("Characterize thread stopped.");
     }
     
+    /**
+     * Stop the thread from running
+     * @param b - true to stop the thread
+     */
     public void stopThread(boolean b){
         mThreadStop = b;
     }

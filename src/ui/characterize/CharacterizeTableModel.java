@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 import net.java.games.input.Component;
 
 /**
- *
+ * The table mode for the JTable shown in the characterize dialog
  * @author Parham
  */
 public class CharacterizeTableModel extends AbstractTableModel {
@@ -56,6 +56,10 @@ public class CharacterizeTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
     
+    /**
+     * Adds a controller component to the model
+     * @param c - the component
+     */
     public void addControllerComponent(Component c){
         mValues.get(0).add(c.getName());
         mValues.get(1).add(new Float(0.00));
@@ -63,6 +67,11 @@ public class CharacterizeTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
     
+    /**
+     * Get the row component data is contained in
+     * @param componentName - the name of the component
+     * @return the row number
+     */
     public int getComponentRow(String componentName){
         return mComponentLookup.get(componentName);
     }

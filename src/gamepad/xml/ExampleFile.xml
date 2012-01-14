@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    Document   : TemplateFile.xml
+    Document   : ExampleFile.xml
     Created on : January 10, 2012, 9:03 PM
     Author     : Parham
     Description:
         This document describes the joystick model and
-        the function and component mappings for USB
+        the function to component mappings for a USB
         gamepad
         
         model - is the model class file you wish to use
