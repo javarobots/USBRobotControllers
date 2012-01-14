@@ -12,10 +12,10 @@ import net.java.games.input.Component;
  */
 public abstract class AbstractComponentFunction implements GamepadFunction {
     
-    protected Component mComponent;
+    protected Component mComponent;   
     
-    public AbstractComponentFunction(Component component){
-        mComponent = component;
+    public AbstractComponentFunction(){
+        
     }
     
 }
