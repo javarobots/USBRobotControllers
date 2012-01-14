@@ -5,6 +5,7 @@
 package ui;
 
 import configuration.Configuration;
+import gamepad.common.GamepadThread;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -23,19 +24,20 @@ public class USBRobotGamepadAppModel extends Observable {
     
     private Controller mSelectedController;
     private Controller[] mAvailableControllers;
-    private Map<String,File> mModelNameToFileName;
+    private Map<File,String> mModelNameToFileName;
+    private GamepadThread mThread;
     
     public void initModel(){
         List<Controller> availableControllers = JinputUtilities.availableGamepads();
         mAvailableControllers = availableControllers.toArray(new Controller[0]);        
         //Init model files
-        mModelNameToFileName = new HashMap<String,File>();
+        mModelNameToFileName = new HashMap<File,String>();
         File[] xmlFiles = Configuration.getInstance().getApplicationDirectory().listFiles();
         for (File f : xmlFiles){
             JdomDocumentReader reader = new JdomDocumentReader(f);
             Element root = reader.initAndGetRoot();
             Element modelElement = root.getChild("model");
-            mModelNameToFileName.put(modelElement.getText(), f);
+            mModelNameToFileName.put(f, modelElement.getText());
         }
         setChanged();
     }
@@ -53,9 +55,18 @@ public class USBRobotGamepadAppModel extends Observable {
         return mAvailableControllers;
     }
 
-    public Map<String, File> getModelNameToFileName() {
+    public Map<File,String> getModelNameToFileName() {
         return mModelNameToFileName;
     }
+
+    public GamepadThread getThread() {
+        return mThread;
+    }
+
+    public void setThread(GamepadThread mThread) {
+        this.mThread = mThread;
+    }
+    
     
     
 }
