@@ -25,7 +25,8 @@ public class GamepadThread implements Runnable {
     public void run() {
         while (!mStopThread){
             try {
-                System.out.println("Thread running");
+                String cmd = mModel.generateCommand();
+                System.out.println(cmd);
                 Thread.sleep(250);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GamepadThread.class.getName()).log(Level.SEVERE, null, ex);
