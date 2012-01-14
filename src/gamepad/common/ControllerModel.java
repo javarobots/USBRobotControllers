@@ -4,11 +4,15 @@
  */
 package gamepad.common;
 
+import net.java.games.input.Controller;
+
 /**
  *
  * @author Parham
  */
 public interface ControllerModel {
+    
+    void setController(Controller c);
     
     void addFunction(GamepadFunction function);
     
