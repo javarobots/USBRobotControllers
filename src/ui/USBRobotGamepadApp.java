@@ -59,7 +59,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
                     gamepadApp.setVisible(true);
                 }
             });
-        } else if (args.length == 1){
+        } else if (args.length > 0){
             if (args[0].equals("rxtx")){
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     @Override
@@ -82,6 +82,10 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
                         dialog.setVisible(true);
                     }
                 });
+            } else {
+                System.out.println("Valid arguments:"
+                        + "\n rxtx - to copy RxTx support files to bin directory"
+                        + "\n jinput - to copy Jinput support files to bin directory");
             }
         }
     }
