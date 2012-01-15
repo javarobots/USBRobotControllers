@@ -41,6 +41,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="mCancelButton" linkSize="1" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="mScrollPane" alignment="0" pref="502" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -55,15 +56,17 @@
                   <Component id="mDirectoryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="mSelectButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="mScrollPane" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="mCancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="mOkButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="mInformationLabel" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,5 +108,17 @@
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;The installation directory should be the bin directory of the JRE and/or JDK.&#xa;&lt;/html&gt;"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JScrollPane" name="mScrollPane">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="mTextArea">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

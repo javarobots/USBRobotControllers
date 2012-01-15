@@ -26,6 +26,16 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
     public JinputInstallationFrame() {
         super();
         initComponents();
+        
+        //Show the java library paths
+        String paths = System.getProperty("java.library.path");
+        String[] indivPath = paths.split(";");
+        for (String p : indivPath){
+            if ((p.contains("Java") || p.contains("java")) && p.contains("Program Files")){
+                mTextArea.append(p + "\n");
+            }
+        }
+        
     }
 
     /** This method is called from within the constructor to
@@ -46,6 +56,8 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
         mInforLabel = new javax.swing.JLabel();
         mRadioButton_32Bit = new javax.swing.JRadioButton();
         mRadioButton_64Bit = new javax.swing.JRadioButton();
+        mScrollPane = new javax.swing.JScrollPane();
+        mTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("JInput Installation");
@@ -83,6 +95,10 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
         bitButtonGroup.add(mRadioButton_64Bit);
         mRadioButton_64Bit.setText("64 Bit");
 
+        mTextArea.setColumns(20);
+        mTextArea.setRows(5);
+        mScrollPane.setViewportView(mTextArea);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,10 +106,6 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(mRadioButton_32Bit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mRadioButton_64Bit))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(mDirectoryLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -105,7 +117,13 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                         .addComponent(mOkButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mCancelButton)))
+                        .addComponent(mCancelButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mRadioButton_32Bit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mRadioButton_64Bit)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(mScrollPane, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
@@ -120,10 +138,12 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
                     .addComponent(mDirectoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mSelectButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mRadioButton_32Bit)
                     .addComponent(mRadioButton_64Bit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(mCancelButton)
@@ -167,7 +187,9 @@ public class JinputInstallationFrame extends javax.swing.JFrame {
     private javax.swing.JButton mOkButton;
     private javax.swing.JRadioButton mRadioButton_32Bit;
     private javax.swing.JRadioButton mRadioButton_64Bit;
+    private javax.swing.JScrollPane mScrollPane;
     private javax.swing.JButton mSelectButton;
+    private javax.swing.JTextArea mTextArea;
     // End of variables declaration//GEN-END:variables
 
     private void performCopy(){       

@@ -27,6 +27,15 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
     public RxtxInstallationFrame() {
         super();
         initComponents();
+        
+        //Show the java library paths
+        String paths = System.getProperty("java.library.path");
+        String[] indivPath = paths.split(";");
+        for (String p : indivPath){
+            if ((p.contains("Java") || p.contains("java")) && p.contains("Program Files")){
+                mTextArea.append(p + "\n");
+            }
+        }
     }
 
     /** This method is called from within the constructor to
@@ -44,6 +53,8 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
         mCancelButton = new javax.swing.JButton();
         mOkButton = new javax.swing.JButton();
         mInformationLabel = new javax.swing.JLabel();
+        mScrollPane = new javax.swing.JScrollPane();
+        mTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RxTx Installation");
@@ -74,6 +85,10 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
 
         mInformationLabel.setText("<html>\nThe installation directory should be the bin directory of the JRE and/or JDK.\n</html>");
 
+        mTextArea.setColumns(20);
+        mTextArea.setRows(5);
+        mScrollPane.setViewportView(mTextArea);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,7 +107,8 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                         .addComponent(mOkButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mCancelButton)))
+                        .addComponent(mCancelButton))
+                    .addComponent(mScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -106,13 +122,15 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
                     .addComponent(mDirectoryLabel)
                     .addComponent(mDirectoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mSelectButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(mCancelButton)
                         .addComponent(mOkButton))
                     .addComponent(mInformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -147,7 +165,9 @@ public class RxtxInstallationFrame extends javax.swing.JFrame {
     private javax.swing.JTextField mDirectoryTextField;
     private javax.swing.JLabel mInformationLabel;
     private javax.swing.JButton mOkButton;
+    private javax.swing.JScrollPane mScrollPane;
     private javax.swing.JButton mSelectButton;
+    private javax.swing.JTextArea mTextArea;
     // End of variables declaration//GEN-END:variables
 
     private void performCopy(){
