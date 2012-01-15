@@ -4,6 +4,7 @@
  */
 package ui;
 
+import commonutilities.swing.ComponentPosition;
 import configuration.Configuration;
 import gamepad.common.ControllerModel;
 import gamepad.common.GamepadFunction;
@@ -12,11 +13,10 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import org.jdom.Element;
+import ui.dialog.ErrorDialog;
 import util.JdomWrapper;
 import util.jinput.JinputUtilities;
 import util.xml.JdomDocumentReader;
@@ -43,15 +43,18 @@ public class USBRobotGamepadAppController {
      * and its .xml file
      */
     public void startGamepadThread(String controllerName, String modelClassAndFileName) {
+        boolean gamepadModelFound = false;
+        boolean functionsFound = false;
         try {
             //Split the model and filename into separate Strings
             String[] splitClassAndFile = modelClassAndFileName.split("-");
             //Get the controller and the controller model
             Controller gameController = JinputUtilities.getControllerByName(controllerName);
             ControllerModel controllerModel = (ControllerModel) Class.forName("gamepad.models." + splitClassAndFile[0]).newInstance();
+            gamepadModelFound = true;
             controllerModel.setController(gameController);
             //Map all component names to components
-            Map<String,Component> componentNameToComponentMap = new HashMap<String,Component>();
+            Map<String,Component> componentNameToComponentMap = new HashMap<>();
             for (Component c : gameController.getComponents()){
                 componentNameToComponentMap.put(c.getName(), c);
             }
@@ -69,18 +72,21 @@ public class USBRobotGamepadAppController {
                     controllerModel.addFunction(gf);
                 }
             }
+            functionsFound = true;
             //Set up the thread
             GamepadThread gt = new GamepadThread(controllerModel);
             gt.setApplicationModel(mModel);
             mModel.setThread(gt);
             Thread t = new Thread(gt);
             t.start();
-        } catch (InstantiationException ex) {
-            Logger.getLogger(USBRobotGamepadAppController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(USBRobotGamepadAppController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(USBRobotGamepadAppController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
+            if (!gamepadModelFound){
+                
+            } else if (!functionsFound){
+                ErrorDialog dialog = new ErrorDialog(null,true,"<html><p align=center>A function specified in the controller model could not be found. Please check the controller model .xml file.</p></html>");
+                ComponentPosition.centerFrame(dialog);
+                dialog.setVisible(true);
+            }
         }
     }
 
@@ -88,7 +94,9 @@ public class USBRobotGamepadAppController {
      * Stop the Gamepad thread
      */
     public void stopThread() {
-        mModel.getThread().stopThread(true);
+        if (mModel.getThread() != null){
+            mModel.getThread().stopThread(true);
+        }
     }
     
 }
