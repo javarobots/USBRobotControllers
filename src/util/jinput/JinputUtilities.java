@@ -24,18 +24,17 @@ public class JinputUtilities {
      */
     public static List<Controller> availableGamepads() {
         List<Controller> controllerList = new ArrayList<>();
-        try{
-            ControllerEnvironment env = ControllerEnvironment.getDefaultEnvironment();
-            Controller[] controllers = env.getControllers();
-            for (Controller c : controllers){
-                if (c.getType() == Type.GAMEPAD){
-                    controllerList.add(c);
-                }
-            }
-        } catch (Exception e){
+        ControllerEnvironment env = ControllerEnvironment.getDefaultEnvironment();
+        Controller[] controllers = env.getControllers();
+        if (controllers.length == 0){
             MissingDllDialog dialog = new MissingDllDialog(null,true);
             ComponentPosition.centerFrame(dialog);
             dialog.setVisible(true);
+        }
+        for (Controller c : controllers){
+            if (c.getType() == Type.GAMEPAD){
+                controllerList.add(c);
+            }
         }
         return controllerList;
     }
