@@ -32,7 +32,7 @@ public class JinputUtilities {
                     controllerList.add(c);
                 }
             }
-        } catch (UnsatisfiedLinkError e){
+        } catch (Exception e){
             MissingDllDialog dialog = new MissingDllDialog(null,true);
             ComponentPosition.centerFrame(dialog);
             dialog.setVisible(true);
