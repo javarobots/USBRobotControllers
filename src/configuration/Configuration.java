@@ -61,9 +61,9 @@ public class Configuration {
             }
         }
         if (!templateExists){
-            ResourceCopier copier = new ResourceCopier("gamepad/xml/TemplateFile.xml", configurationDirectory.toString() + "/Template.xml");
+            ResourceCopier copier = new ResourceCopier("gamepad/xml/ExampleFile.xml", configurationDirectory.toString() + "/Example.xml");
             copier.copyFile();
-            ConsoleOutput.outToConsole("TemplateFile.xml copied");
+            ConsoleOutput.outToConsole("Example.xml copied");
         }
     }
     

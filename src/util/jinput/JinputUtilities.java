@@ -4,6 +4,7 @@
  */
 package util.jinput;
 
+import commonutilities.swing.ComponentPosition;
 import java.util.ArrayList;
 import java.util.List;
 import net.java.games.input.Controller;
@@ -22,13 +23,19 @@ public class JinputUtilities {
      * @return 
      */
     public static List<Controller> availableGamepads() {
-        List<Controller> controllerList = new ArrayList<Controller>();
-        ControllerEnvironment env = ControllerEnvironment.getDefaultEnvironment();
-        Controller[] controllers = env.getControllers();
-        for (Controller c : controllers){
-            if (c.getType() == Type.GAMEPAD){
-                controllerList.add(c);
+        List<Controller> controllerList = new ArrayList<>();
+        try{
+            ControllerEnvironment env = ControllerEnvironment.getDefaultEnvironment();
+            Controller[] controllers = env.getControllers();
+            for (Controller c : controllers){
+                if (c.getType() == Type.GAMEPAD){
+                    controllerList.add(c);
+                }
             }
+        } catch (UnsatisfiedLinkError e){
+            MissingDllDialog dialog = new MissingDllDialog(null,true);
+            ComponentPosition.centerFrame(dialog);
+            dialog.setVisible(true);
         }
         return controllerList;
     }
