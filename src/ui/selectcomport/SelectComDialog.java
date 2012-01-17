@@ -4,6 +4,8 @@
  */
 package ui.selectcomport;
 
+import util.rxtx.RxTxUtilities;
+
 /**
  *
  * @author jparham
@@ -16,6 +18,10 @@ public class SelectComDialog extends javax.swing.JDialog {
     public SelectComDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        //Debug
+        RxTxUtilities.getAvailablePorts();
+        
     }
 
     /**
