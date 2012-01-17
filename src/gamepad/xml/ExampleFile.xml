@@ -18,6 +18,6 @@
     <model>DefaultModel</model>
     <control>
         <component>Y Axis</component>
-        <function>TestFunction</function>
+        <function>ExampleFunction</function>
     </control>
 </usbcontroller>
