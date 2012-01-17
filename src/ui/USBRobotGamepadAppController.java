@@ -16,7 +16,9 @@ import java.util.Map;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import org.jdom.Element;
+import ui.characterize.CharacterizeDialog;
 import ui.dialog.ErrorDialog;
+import ui.selectcomport.SelectComDialog;
 import util.JdomWrapper;
 import util.jinput.JinputUtilities;
 import util.xml.JdomDocumentReader;
@@ -97,6 +99,18 @@ public class USBRobotGamepadAppController {
         if (mModel.getThread() != null){
             mModel.getThread().stopThread(true);
         }
+    }
+
+    public void characterizeJoystick() {        
+        CharacterizeDialog dialog = new CharacterizeDialog(mModel.getParentFrame(), true);
+        ComponentPosition.centerFrame(dialog);
+        dialog.setVisible(true);
+    }
+    
+    public void selectCOMPort(){
+        SelectComDialog dialog = new SelectComDialog(mModel.getParentFrame(),true);
+        ComponentPosition.centerFrame(dialog);
+        dialog.setVisible(true);
     }
     
 }

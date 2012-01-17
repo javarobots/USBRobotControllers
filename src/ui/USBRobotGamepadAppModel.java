@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import javax.swing.JFrame;
 import net.java.games.input.Controller;
 import org.jdom.Element;
 import util.jinput.JinputUtilities;
@@ -27,6 +28,11 @@ public class USBRobotGamepadAppModel extends Observable {
     private Map<File,String> mModelNameToFileName;
     private GamepadThread mThread;
     private String mCommandString = "";
+    private JFrame mParentFrame;
+    
+    public USBRobotGamepadAppModel(JFrame parentFrame){
+        mParentFrame = parentFrame;
+    }
     
     /**
      * Initialize the model
@@ -35,7 +41,7 @@ public class USBRobotGamepadAppModel extends Observable {
         List<Controller> availableControllers = JinputUtilities.availableGamepads();
         mAvailableControllers = availableControllers.toArray(new Controller[0]);        
         //Init model files
-        mModelNameToFileName = new HashMap<File,String>();
+        mModelNameToFileName = new HashMap<>();
         File[] xmlFiles = Configuration.getInstance().getApplicationDirectory().listFiles();
         for (File f : xmlFiles){
             JdomDocumentReader reader = new JdomDocumentReader(f);
@@ -78,6 +84,10 @@ public class USBRobotGamepadAppModel extends Observable {
     public void setCommandString(String mCommandString) {
         this.mCommandString = mCommandString;
         setChanged();
+    }
+
+    public JFrame getParentFrame() {
+        return mParentFrame;
     }
     
 }

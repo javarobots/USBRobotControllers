@@ -22,7 +22,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import net.java.games.input.Controller;
 import net.java.games.input.Version;
-import ui.characterize.CharacterizeDialog;
 import ui.installation.JinputInstallationFrame;
 import ui.installation.RxtxInstallationFrame;
 
@@ -50,7 +49,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
                     Configuration.getInstance().configurationChecks();
                     //Instamtiate the application
                     USBRobotGamepadApp gamepadApp = new USBRobotGamepadApp();
-                    USBRobotGamepadAppModel model = new USBRobotGamepadAppModel();
+                    USBRobotGamepadAppModel model = new USBRobotGamepadAppModel(gamepadApp);
                     model.addObserver(gamepadApp);
                     model.initModel();
                     model.notifyObservers();
@@ -60,32 +59,36 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
                 }
             });
         } else if (args.length > 0){
-            if (args[0].equals("rxtx")){
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        setLookAndFeel();
-                        //Center the frame
-                        RxtxInstallationFrame dialog = new RxtxInstallationFrame();
-                        ComponentPosition.centerFrame(dialog);
-                        dialog.setVisible(true);
-                    }
-                });
-            } else if (args[0].equals("jinput")){
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        setLookAndFeel();
-                        //Center the frame
-                        JinputInstallationFrame dialog = new JinputInstallationFrame();
-                        ComponentPosition.centerFrame(dialog);
-                        dialog.setVisible(true);
-                    }
-                });
-            } else {
-                System.out.println("Valid arguments:"
-                        + "\n rxtx - to copy RxTx support files to bin directory"
-                        + "\n jinput - to copy Jinput support files to bin directory");
+            switch (args[0]) {
+                case "rxtx":
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            setLookAndFeel();
+                            //Center the frame
+                            RxtxInstallationFrame dialog = new RxtxInstallationFrame();
+                            ComponentPosition.centerFrame(dialog);
+                            dialog.setVisible(true);
+                        }
+                    });
+                    break;
+                case "jinput":
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            setLookAndFeel();
+                            //Center the frame
+                            JinputInstallationFrame dialog = new JinputInstallationFrame();
+                            ComponentPosition.centerFrame(dialog);
+                            dialog.setVisible(true);
+                        }
+                    });
+                    break;
+                default:
+                    System.out.println("Valid arguments:"
+                            + "\n rxtx - to copy RxTx support files to bin directory"
+                            + "\n jinput - to copy Jinput support files to bin directory");
+                    break;
             }
         }
     }
@@ -117,6 +120,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         mExitMenuItem = new javax.swing.JMenuItem();
         mEditMenu = new javax.swing.JMenu();
         mCharacterizeMenuItem = new javax.swing.JMenuItem();
+        mSelectComPortMenuItem = new javax.swing.JMenuItem();
         mJinputVersionMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,6 +175,14 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
             }
         });
         mEditMenu.add(mCharacterizeMenuItem);
+
+        mSelectComPortMenuItem.setText("Select COM Port");
+        mSelectComPortMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mSelectComPortMenuItemActionPerformed(evt);
+            }
+        });
+        mEditMenu.add(mSelectComPortMenuItem);
 
         mJinputVersionMenuItem.setText("Show JInput Version");
         mJinputVersionMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -250,9 +262,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_mJinputVersionMenuItemActionPerformed
 
     private void mCharacterizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mCharacterizeMenuItemActionPerformed
-        CharacterizeDialog dialog = new CharacterizeDialog(this, true);
-        ComponentPosition.centerFrame(dialog);
-        dialog.setVisible(true);
+        mController.characterizeJoystick();
     }//GEN-LAST:event_mCharacterizeMenuItemActionPerformed
 
     private void mStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mStartButtonActionPerformed
@@ -274,6 +284,10 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         mController.stopThread();
     }//GEN-LAST:event_mStopButtonActionPerformed
 
+    private void mSelectComPortMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSelectComPortMenuItemActionPerformed
+        mController.selectCOMPort();
+    }//GEN-LAST:event_mSelectComPortMenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem mCharacterizeMenuItem;
     private javax.swing.JTextField mCommandTextField;
@@ -287,6 +301,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel mLastCommandStringLabel;
     private javax.swing.JMenuBar mMenuBar;
     private javax.swing.JComboBox mModelsComboBox;
+    private javax.swing.JMenuItem mSelectComPortMenuItem;
     private javax.swing.JButton mStartButton;
     private javax.swing.JButton mStopButton;
     // End of variables declaration//GEN-END:variables
@@ -295,13 +310,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         //Set the look and feel to Nimbus
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(USBRobotGamepadApp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -313,7 +322,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
             if (!mComboBoxesUpdated){
                 //Get available controllers
                 Controller[] controllers = model.getAvailableControllers();
-                List<String> controllerNames = new ArrayList<String>();
+                List<String> controllerNames = new ArrayList<>();
                 controllerNames.add(mFirstListEntry);
                 for (Controller c : controllers){
                     controllerNames.add(c.getName());
