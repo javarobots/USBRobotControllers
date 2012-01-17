@@ -4,6 +4,7 @@
  */
 package ui.selectcomport;
 
+import java.util.List;
 import util.rxtx.RxTxUtilities;
 
 /**
@@ -20,7 +21,10 @@ public class SelectComDialog extends javax.swing.JDialog {
         initComponents();
         
         //Debug
-        RxTxUtilities.getAvailablePorts();
+        List<String> portNames = RxTxUtilities.getAvailablePorts();
+        for (String s : portNames){
+            System.out.println("Port Name " + s);
+        }
         
     }
 

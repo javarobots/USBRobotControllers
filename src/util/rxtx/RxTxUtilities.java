@@ -5,7 +5,9 @@
 package util.rxtx;
 
 import gnu.io.CommPortIdentifier;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 /**
  * A utility class for the RxTx library
@@ -13,12 +15,16 @@ import java.util.Enumeration;
  */
 public class RxTxUtilities {
     
-    public static void getAvailablePorts(){
+    public static List<String> getAvailablePorts(){
+        List<String> portNames = new ArrayList<>();
         Enumeration identifiers = CommPortIdentifier.getPortIdentifiers();
         while (identifiers.hasMoreElements()){
-            String name = ((CommPortIdentifier)identifiers.nextElement()).getName();
-            System.out.println("Port name: " + name);
+            CommPortIdentifier identifier = (CommPortIdentifier) identifiers.nextElement();
+            if (identifier.getPortType() == CommPortIdentifier.PORT_SERIAL){
+                portNames.add(identifier.getName());
+            }
         }
+        return portNames;
     }
     
 }
