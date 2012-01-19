@@ -17,7 +17,7 @@ public class SelectComDialogController {
     }
     
     public void saveSelectedPort(String selectedPort){
-        
+        System.out.println("Save file");
     }
     
 }
