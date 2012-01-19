@@ -4,28 +4,26 @@
  */
 package ui.selectcomport;
 
-import java.util.List;
-import util.rxtx.RxTxUtilities;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author jparham
  */
-public class SelectComDialog extends javax.swing.JDialog {
+public class SelectComDialog extends javax.swing.JDialog implements Observer {
 
     /**
      * Creates new form SelectComDialog
      */
+    @SuppressWarnings("LeakingThisInConstructor")
     public SelectComDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        //Debug
-        List<String> portNames = RxTxUtilities.getAvailablePorts();
-        for (String s : portNames){
-            System.out.println("Port Name " + s);
-        }
-        
+        SelectComDialogModel m = new SelectComDialogModel(this);
+        m.addObserver(this);
+        m.notifyObservers();
     }
 
     /**
@@ -37,23 +35,48 @@ public class SelectComDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        mSerialPortComboBox = new javax.swing.JComboBox();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Select COM Port");
+
+        jLabel1.setText("COM Port:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mSerialPortComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(247, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(mSerialPortComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox mSerialPortComboBox;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        if (o instanceof SelectComDialogModel){
+            SelectComDialogModel model = (SelectComDialogModel) o;
+            mSerialPortComboBox.setModel(new DefaultComboBoxModel(model.getmAvailableComPorts().toArray(new String[0])));
+        }
+    }
 }

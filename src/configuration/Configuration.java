@@ -19,6 +19,7 @@ public class Configuration {
     public static final int OPEN_COMM_PAUSE = 2500;
     public static final String CONFIGURATION_DIRECTORY = "/USBController";
     public static final boolean OUTPUT_TO_CONSOLE = true;
+    public static final String COM_PORT_SELECTION_FILE = "/comSelection.xml";
         
     private Configuration(){
         
@@ -79,10 +80,20 @@ public class Configuration {
     /**
      * The directory path where model .xml 
      * files are written
-     * @return the application directory path
+     * @return the application directory file
      */
     public File getApplicationDirectory(){
         return new File(mUserHome + CONFIGURATION_DIRECTORY);
+    }
+    
+    /**
+     * The file where the COM selection
+     * information is saved. This file
+     * is in the configuration directory
+     * @return the COM selection file
+     */
+    public File getComSelectionFile(){
+        return new File(mUserHome + CONFIGURATION_DIRECTORY + COM_PORT_SELECTION_FILE);
     }
     
     /**
