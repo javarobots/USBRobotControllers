@@ -30,7 +30,7 @@ import ui.installation.RxtxInstallationFrame;
  * @author Parham
  */
 public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
-    
+
     private static USBRobotGamepadAppController mController;
     private String mFirstListEntry = "No Controller Selected";
     private boolean mComboBoxesUpdated = false;
@@ -271,12 +271,10 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
 
     private void mControllerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mControllerComboBoxActionPerformed
         if (!mControllerComboBox.getSelectedItem().toString().equals(mFirstListEntry)){
-            mStartButton.setEnabled(true);
-            mStopButton.setEnabled(true);
+            mController.joystickSelected(true);
         }
         else {
-            mStartButton.setEnabled(false);
-            mStopButton.setEnabled(false);
+            mController.joystickSelected(false);
         }
     }//GEN-LAST:event_mControllerComboBoxActionPerformed
 
@@ -318,16 +316,18 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof USBRobotGamepadAppModel){
-            USBRobotGamepadAppModel model = (USBRobotGamepadAppModel)o;            
+            USBRobotGamepadAppModel model = (USBRobotGamepadAppModel)o;
             if (!mComboBoxesUpdated){
+
                 //Get available controllers
                 Controller[] controllers = model.getAvailableControllers();
                 List<String> controllerNames = new ArrayList<>();
                 controllerNames.add(mFirstListEntry);
                 for (Controller c : controllers){
                     controllerNames.add(c.getName());
-                }                
-                mControllerComboBox.setModel(new DefaultComboBoxModel(controllerNames.toArray(new String[0])));            
+                }
+                mControllerComboBox.setModel(new DefaultComboBoxModel(controllerNames.toArray(new String[0])));
+
                 //Get available model classes
                 Map<File,String> modelToFileMap = model.getModelNameToFileName();
                 String[] comboBoxNames = new String[modelToFileMap.size()];
@@ -338,7 +338,16 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
                 mModelsComboBox.setModel(new DefaultComboBoxModel(comboBoxNames));
                 mComboBoxesUpdated = true;
             }
+
+            if (model.isJoystickSelected() && model.isSerialportSelected()){
+                mStartButton.setEnabled(true);
+                mStopButton.setEnabled(true);
+            } else {
+                mStartButton.setEnabled(false);
+                mStopButton.setEnabled(false);
+            }
+
             mCommandTextField.setText(model.getCommandString());
-        }    
+        }
     }
 }
