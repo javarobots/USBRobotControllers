@@ -54,7 +54,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="mErrorLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;No USB gamepad was found on your system. There are two possible causes:&lt;br&gt;&lt;br&gt;&#xa;1 - A system installed gamepad is not plugged in to the USB.&lt;br&gt;&#xa;2 - Jinput .dll files are missing.&lt;br&gt;&lt;br&gt;&#xa;Please plug in an installed gamepad or check your Java configuration by running &lt;b&gt;java -jar USBRobotGamepadApp.java jinput&lt;/b&gt; on the command line to install files.&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;No USB gamepad was found on your system. There are two possible causes:&lt;br&gt;&lt;br&gt;&#xa;1 - A system installed gamepad is not plugged in to the USB port.&lt;br&gt;&#xa;2 - Jinput .dll files are missing.&lt;br&gt;&lt;br&gt;&#xa;Please plug in an installed gamepad or check your Java configuration by running &lt;b&gt;java -jar USBRobotGamepadApp.java jinput&lt;/b&gt; on the command line to install files.&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="mExitButton">

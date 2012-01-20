@@ -4,6 +4,8 @@
  */
 package util.jinput;
 
+import commonutilities.swing.ComponentPosition;
+
 /**
  *
  * @author Parham
@@ -33,7 +35,7 @@ public class MissingDllDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("No USB Gamepad");
 
-        mErrorLabel.setText("<html>No USB gamepad was found on your system. There are two possible causes:<br><br>\n1 - A system installed gamepad is not plugged in to the USB.<br>\n2 - Jinput .dll files are missing.<br><br>\nPlease plug in an installed gamepad or check your Java configuration by running <b>java -jar USBRobotGamepadApp.java jinput</b> on the command line to install files.</html>");
+        mErrorLabel.setText("<html>No USB gamepad was found on your system. There are two possible causes:<br><br>\n1 - A system installed gamepad is not plugged in to the USB port.<br>\n2 - Jinput .dll files are missing.<br><br>\nPlease plug in an installed gamepad or check your Java configuration by running <b>java -jar USBRobotGamepadApp.java jinput</b> on the command line to install files.</html>");
 
         mExitButton.setText("Exit");
         mExitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -78,4 +80,11 @@ public class MissingDllDialog extends javax.swing.JDialog {
     private javax.swing.JLabel mErrorLabel;
     private javax.swing.JButton mExitButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setVisible(boolean b){
+        ComponentPosition.centerFrame(this);
+        super.setVisible(b);
+    }
+
 }
