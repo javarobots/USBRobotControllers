@@ -22,36 +22,50 @@ import util.xml.JdomDocumentReader;
  * @author Parham
  */
 public class USBRobotGamepadAppModel extends Observable {
-    
+
     private Controller mSelectedController;
+    private String mSelectedComPortName;
     private Controller[] mAvailableControllers;
     private Map<File,String> mModelNameToFileName;
     private GamepadThread mThread;
     private String mCommandString = "";
     private JFrame mParentFrame;
-    
+    private boolean mJoystickSelected = false;
+    private boolean mSerialportSelected = false;
+
     public USBRobotGamepadAppModel(JFrame parentFrame){
         mParentFrame = parentFrame;
     }
-    
+
     /**
      * Initialize the model
      */
     public void initModel(){
         List<Controller> availableControllers = JinputUtilities.availableGamepads();
-        mAvailableControllers = availableControllers.toArray(new Controller[0]);        
+        mAvailableControllers = availableControllers.toArray(new Controller[0]);
         //Init model files
         mModelNameToFileName = new HashMap<>();
         File[] xmlFiles = Configuration.getInstance().getApplicationDirectory().listFiles();
         for (File f : xmlFiles){
-            JdomDocumentReader reader = new JdomDocumentReader(f);
-            Element root = reader.initAndGetRoot();
-            Element modelElement = root.getChild("model");
-            mModelNameToFileName.put(f, modelElement.getText());
+            //Read in info from files that aren;t the com selection file
+            if (!f.getName().equals(Configuration.getInstance().getComSelectionFile().getName())){
+                //Read in info from files that aren;t the com selection file
+                JdomDocumentReader reader = new JdomDocumentReader(f);
+                Element root = reader.initAndGetRoot();
+                Element modelElement = root.getChild("model");
+                mModelNameToFileName.put(f, modelElement.getText());
+            } else if (f.getName().equals(Configuration.getInstance().getComSelectionFile().getName())){
+                //Read the com selection file
+                JdomDocumentReader reader = new JdomDocumentReader(f);
+                Element root = reader.initAndGetRoot();
+                Element selectedPort = root.getChild("selectedport");
+                mSelectedComPortName = selectedPort.getValue();
+                mSerialportSelected = true;
+            }
         }
         setChanged();
     }
-    
+
     public Controller getSelectedController() {
         return mSelectedController;
     }
@@ -89,5 +103,31 @@ public class USBRobotGamepadAppModel extends Observable {
     public JFrame getParentFrame() {
         return mParentFrame;
     }
-    
+
+    public String getSelectedComPortName() {
+        return mSelectedComPortName;
+    }
+
+    public void setSelectedComPortName(String selectedComPortName) {
+        this.mSelectedComPortName = selectedComPortName;
+        setChanged();
+    }
+
+    public boolean isJoystickSelected() {
+        return mJoystickSelected;
+    }
+
+    public void setJoystickSelected(boolean mJoystickSelected) {
+        this.mJoystickSelected = mJoystickSelected;
+        setChanged();
+    }
+
+    public boolean isSerialportSelected() {
+        return mSerialportSelected;
+    }
+
+
+
+
+
 }
