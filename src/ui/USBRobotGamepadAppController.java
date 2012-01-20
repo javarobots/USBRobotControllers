@@ -30,9 +30,9 @@ import util.xml.JdomDocumentReader;
  * @author Parham
  */
 public class USBRobotGamepadAppController {
-    
+
     private USBRobotGamepadAppModel mModel;
-    
+
     public USBRobotGamepadAppController(USBRobotGamepadAppModel model){
         mModel = model;
     }
@@ -60,7 +60,7 @@ public class USBRobotGamepadAppController {
             for (Component c : gameController.getComponents()){
                 componentNameToComponentMap.put(c.getName(), c);
             }
-            //Determine components and corresponding function to load            
+            //Determine components and corresponding function to load
             JdomDocumentReader reader = new JdomDocumentReader(new File(Configuration.getInstance().getApplicationDirectory(),splitClassAndFile[1]));
             Element rootElement = reader.initAndGetRoot();
             List<Element> rootChildren = JdomWrapper.getChildren(rootElement);
@@ -83,7 +83,7 @@ public class USBRobotGamepadAppController {
             t.start();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
             if (!gamepadModelFound){
-                
+
             } else if (!functionsFound){
                 ErrorDialog dialog = new ErrorDialog(null,true,"<html><p align=center>A function specified in the controller model could not be found. Please check the controller model .xml file.</p></html>");
                 ComponentPosition.centerFrame(dialog);
@@ -101,16 +101,25 @@ public class USBRobotGamepadAppController {
         }
     }
 
-    public void characterizeJoystick() {        
+    public void characterizeJoystick() {
         CharacterizeDialog dialog = new CharacterizeDialog(mModel.getParentFrame(), true);
         ComponentPosition.centerFrame(dialog);
         dialog.setVisible(true);
     }
-    
+
     public void selectCOMPort(){
-        SelectComDialog dialog = new SelectComDialog(mModel.getParentFrame(),true);
+        SelectComDialog dialog = new SelectComDialog(mModel.getParentFrame(), true, mModel);
         ComponentPosition.centerFrame(dialog);
         dialog.setVisible(true);
     }
-    
+
+    public void joystickSelected(boolean b){
+        if (true){
+            mModel.setJoystickSelected(true);
+        } else {
+            mModel.setJoystickSelected(false);
+        }
+        mModel.notifyObservers();
+    }
+
 }
