@@ -11,18 +11,18 @@ import net.java.games.input.Component;
  * @author Parham
  */
 public interface GamepadFunction {
-    
+
     /**
      * Evaluate the function
      * @return the function's float value
      */
-    float evaluateFunction();
-    
+    String evaluateFunction();
+
     /**
      * Sets the controller component
      * for the function
      * @param c - the component
      */
     void setComponent(Component c);
-    
+
 }

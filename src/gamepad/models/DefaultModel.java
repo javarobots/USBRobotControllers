@@ -15,21 +15,21 @@ import net.java.games.input.Controller;
  * The default Gamepad model. This model build command
  * string using $CNT has it's message header and comma
  * delimits function values
- * 
+ *
  * e.g. $CNT,123,456
- * 
+ *
  * @author Parham
  */
 public class DefaultModel implements ControllerModel {
-    
+
     private Controller mController;
     private List<GamepadFunction> mFunctions;
-    
+
     public DefaultModel(){
         mFunctions = new ArrayList<>();
        ConsoleOutput.outToConsole("DefaultModel instantiated.");
     }
-    
+
     @Override
     public void setController(Controller c){
         mController = c;
@@ -47,9 +47,9 @@ public class DefaultModel implements ControllerModel {
         //Build the command
         StringBuilder commandBuilder = new StringBuilder("$CNT");
         for (GamepadFunction gf : mFunctions){
-            commandBuilder.append(",").append(Float.toString(gf.evaluateFunction()));
+            commandBuilder.append(",").append(gf.evaluateFunction());
         }
         return commandBuilder.toString();
     }
-    
+
 }
