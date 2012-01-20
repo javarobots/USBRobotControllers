@@ -57,12 +57,12 @@ public class Configuration {
         //Check for template .xml file        
         boolean templateExists = false;
         for (File f :configurationDirectory.listFiles()){
-            if (f.getName().equals("TemplateFile")){
+            if (f.getName().equals("Example.xml")){
                 templateExists = true;
             }
         }
         if (!templateExists){
-            ResourceCopier copier = new ResourceCopier("gamepad/xml/ExampleFile.xml", configurationDirectory.toString() + "/Example.xml");
+            ResourceCopier copier = new ResourceCopier("gamepad/xml/Example.xml", configurationDirectory.toString() + "/Example.xml");
             copier.copyFile();
             ConsoleOutput.outToConsole("Example.xml copied");
         }

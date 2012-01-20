@@ -1,0 +1,103 @@
+<project name="usbRobotControllet" default="dist" basedir=".">
+    <description>
+        Robot controller software that utilizes USB cotrollers for input.
+    </description>
+    
+    <!-- Common directories -->
+    <property name="bin" location="bin" />
+    <property name="build" location="build" />
+    <property name="dist" location="dist" />
+    <property name="documentation" location="documentation" />
+    <property name="jars" location="jars" />
+    <property name="javadoc" location="${build}/javadoc" />
+    <property name="src" location="src" />
+    
+    <!-- Build properties -->
+    <property name="debug" value="on" />
+    <property name="debuglevel" value="lines,vars,source" />
+    <property name="compile.verbose" value="no" />
+    <property environment="env" />
+    <property name="JAVA_HOME" value="${env.JAVA_HOME}" />
+    <condition property="is-windows">
+            <os family="windows"/>
+    </condition>
+    
+    <!-- Path references -->
+    <path id="classpath.base">
+    <fileset dir="jars">
+            <include name="*.jar"/>
+    </fileset>
+    </path>
+    
+    <!-- Start class -->
+    <property name="USBRobotControllers-main-class" value="ui.USBRobotGamepadApp"/>
+    
+    <!-- Begin targets -->
+    
+    <target name="init">
+        <mkdir dir="${build}"/>
+        <mkdir dir="${dist}" />
+    </target>
+    
+    <target name="compile" depends="init" description="Compile source files">
+        <javac srcdir="${src}" destdir="${build}"
+            source="1.7"
+            debug="${debug}"
+            debuglevel="${debuglevel}"
+            verbose="${compile.verbose}"
+            includeantruntime="no">
+
+            <classpath refid="classpath.base"/>    
+            <compilerarg value="-Xlint:deprecation" />
+            <!--<compilerarg value="-Xlint:unchecked" />-->
+        </javac>
+
+        <!-- Copy resources 
+        <copy todir="${build}/gamepad/xml">
+            <fileset dir="${src}/gamepad/xml">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+        <copy todir="${build}/resources">
+            <fileset dir="${src}/resources">
+                <include name="**/*"/>
+            </fileset>
+        </copy>-->
+        
+    </target>
+    
+    <target name="dist" depends="clean,compile" description="Generate the executable .jar">
+        <!-- Put everything in ${build} USBRobotControllers.jar file -->			
+        <jar jarfile="${dist}/USBRobotControllers.jar" basedir="${build}">
+                <zipfileset includes="**/*" src="jars/common-utilities.jar"/>
+                <zipfileset includes="**/*" src="jars/RXTXcomm.jar"/>
+                <zipfileset includes="**/*" src="jars/jdom.jar"/>
+                <zipfileset includes="**/*" src="jars/jinput.jar"/>
+                <manifest>
+                        <attribute name="Main-Class" value="${USBRobotControllers-main-class}"/>
+                </manifest>
+        </jar>
+        
+        <!-- Copy rxtx and jinput dll files to dist directory-->
+        <!-- Copy resources -->
+        <copy todir="${dist}/resources">
+            <fileset dir="${src}/resources/jinput">
+                <include name="**/*"/>
+            </fileset>
+            <fileset dir="${src}/resources/rxtx">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+        <copy todir="${dist}">
+            <fileset dir="${src}/resources/startup">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="clean" description="Cleans past build files">
+            <delete dir="${build}" />
+            <delete dir="${dist}" />
+    </target>
+    
+</project>

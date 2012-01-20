@@ -4,6 +4,7 @@
  */
 package util;
 
+import configuration.ConsoleOutput;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +37,9 @@ public class ResourceCopier {
             //Create streams for copying serial file
             InputStream in = this.getClass().getClassLoader().getResourceAsStream(sourcePath);
             OutputStream out = new FileOutputStream(destPath);
+            
+            ConsoleOutput.outToConsole("Source path: " + sourcePath);
+            ConsoleOutput.outToConsole("Destination path" + destPath);
 
             //Create copy buffer and copy file
             byte[] buffer = new byte[4096];
