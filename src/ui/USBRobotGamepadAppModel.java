@@ -126,8 +126,9 @@ public class USBRobotGamepadAppModel extends Observable {
         return mSerialportSelected;
     }
 
-
-
-
+    public void setSerialportSelected(boolean mSerialportSelected) {
+        this.mSerialportSelected = mSerialportSelected;
+        setChanged();
+    }
 
 }

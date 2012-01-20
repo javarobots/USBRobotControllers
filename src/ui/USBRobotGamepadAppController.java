@@ -114,7 +114,7 @@ public class USBRobotGamepadAppController {
     }
 
     public void joystickSelected(boolean b){
-        if (true){
+        if (b){
             mModel.setJoystickSelected(true);
         } else {
             mModel.setJoystickSelected(false);

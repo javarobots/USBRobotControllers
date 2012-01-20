@@ -112,6 +112,8 @@ public class SelectComDialog extends javax.swing.JDialog implements Observer {
         String selectedPortName = mSerialPortComboBox.getSelectedItem().toString();
         mController.saveSelectedPort(selectedPortName);
         mApplicationModel.setSelectedComPortName(selectedPortName);
+        mApplicationModel.setSerialportSelected(true);
+        mApplicationModel.notifyObservers();
         this.dispose();
     }//GEN-LAST:event_mOkButtonActionPerformed
 
