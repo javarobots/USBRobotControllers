@@ -7,22 +7,25 @@ package ui.selectcomport;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultComboBoxModel;
+import ui.USBRobotGamepadAppModel;
 
 /**
  *
  * @author jparham
  */
 public class SelectComDialog extends javax.swing.JDialog implements Observer {
-    
+
     private SelectComDialogController mController;
-    
+    private USBRobotGamepadAppModel mApplicationModel;
+
     /**
      * Creates new form SelectComDialog
      */
     @SuppressWarnings("LeakingThisInConstructor")
-    public SelectComDialog(java.awt.Frame parent, boolean modal) {
+    public SelectComDialog(java.awt.Frame parent, boolean modal, USBRobotGamepadAppModel applicationModel) {
         super(parent, modal);
         initComponents();
+        mApplicationModel = applicationModel;
         SelectComDialogModel m = new SelectComDialogModel(this);
         m.addObserver(this);
         m.notifyObservers();
@@ -106,10 +109,12 @@ public class SelectComDialog extends javax.swing.JDialog implements Observer {
     }//GEN-LAST:event_mCancelButtonActionPerformed
 
     private void mOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mOkButtonActionPerformed
-        mController.saveSelectedPort(mSerialPortComboBox.getSelectedItem().toString());
+        String selectedPortName = mSerialPortComboBox.getSelectedItem().toString();
+        mController.saveSelectedPort(selectedPortName);
+        mApplicationModel.setSelectedComPortName(selectedPortName);
         this.dispose();
     }//GEN-LAST:event_mOkButtonActionPerformed
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton mCancelButton;
     private javax.swing.JLabel mComportLabel;
@@ -122,6 +127,9 @@ public class SelectComDialog extends javax.swing.JDialog implements Observer {
         if (o instanceof SelectComDialogModel){
             SelectComDialogModel model = (SelectComDialogModel) o;
             mSerialPortComboBox.setModel(new DefaultComboBoxModel(model.getmAvailableComPorts().toArray(new String[0])));
+            if (mApplicationModel.isSerialportSelected()){
+                mSerialPortComboBox.getModel().setSelectedItem(mApplicationModel.getSelectedComPortName());
+            }
         }
     }
 }
