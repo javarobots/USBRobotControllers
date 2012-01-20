@@ -16,7 +16,7 @@ import net.java.games.input.ControllerEnvironment;
  * @author Parham
  */
 public class JinputUtilities {
-    
+
     /**
      * Get a list of all available controllers
      * plugged in to the computer
@@ -28,7 +28,6 @@ public class JinputUtilities {
         Controller[] controllers = env.getControllers();
         if (controllers.length == 0){
             MissingDllDialog dialog = new MissingDllDialog(null,true);
-            ComponentPosition.centerFrame(dialog);
             dialog.setVisible(true);
         }
         for (Controller c : controllers){
@@ -36,9 +35,13 @@ public class JinputUtilities {
                 controllerList.add(c);
             }
         }
+        if (controllerList.isEmpty()){
+            MissingDllDialog dialog = new MissingDllDialog(null,true);
+            dialog.setVisible(true);
+        }
         return controllerList;
     }
-    
+
     /**
      * Get a controller object by name.
      * @param controllerName - the name of the controller
@@ -54,7 +57,7 @@ public class JinputUtilities {
         }
         return null;
     }
-    
+
     /**
      * Get a controller object my name and port number
      * @param controllerName - the controller name
@@ -71,5 +74,5 @@ public class JinputUtilities {
         }
         return null;
     }
-    
+
 }
