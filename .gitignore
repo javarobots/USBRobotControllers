@@ -3,3 +3,4 @@ build/*
 *~*
 /USBRobotControllers/nbproject/private/
 dist*
+cecBuild.xml
