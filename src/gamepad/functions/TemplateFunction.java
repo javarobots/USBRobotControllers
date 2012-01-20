@@ -15,9 +15,9 @@ public class TemplateFunction extends AbstractComponentFunction {
 
         //Create your custom function here
         float calculatedValue = readValue * 100;
-
-
         valueString = Float.toString(calculatedValue);
+
+
         return valueString;
     }
 

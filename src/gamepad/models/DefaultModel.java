@@ -44,11 +44,15 @@ public class DefaultModel implements ControllerModel {
     public String generateCommand() {
         //Poll the controller obtaining new values
         mController.poll();
+
+
         //Build the command
         StringBuilder commandBuilder = new StringBuilder("$CNT");
         for (GamepadFunction gf : mFunctions){
             commandBuilder.append(",").append(gf.evaluateFunction());
         }
+
+
         return commandBuilder.toString();
     }
 
