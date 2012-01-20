@@ -78,32 +78,30 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="mLastCommandStringLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="mCommandTextField" max="32767" attributes="0"/>
+                  <Component id="mCommandTextField" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="mControllerModelLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="mControllerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="mModelsComboBox" min="-2" pref="294" max="-2" attributes="0"/>
-                                  <Component id="mControllerComboBox" alignment="0" min="-2" pref="294" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="mStartButton" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="mStopButton" linkSize="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="mControllerModelLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="mControllerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="mModelsComboBox" min="-2" pref="294" max="-2" attributes="0"/>
+                          <Component id="mControllerComboBox" alignment="0" min="-2" pref="294" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="mSendToSerialCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="mStartButton" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mStopButton" linkSize="1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -131,6 +129,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="mStopButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="mStartButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mSendToSerialCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -189,6 +188,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="mCommandTextField">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="mSendToSerialCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Send to Serial Port"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

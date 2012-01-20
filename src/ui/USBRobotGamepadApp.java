@@ -115,6 +115,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         mStartButton = new javax.swing.JButton();
         mLastCommandStringLabel = new javax.swing.JLabel();
         mCommandTextField = new javax.swing.JTextField();
+        mSendToSerialCheckBox = new javax.swing.JCheckBox();
         mMenuBar = new javax.swing.JMenuBar();
         mFileMenu = new javax.swing.JMenu();
         mExitMenuItem = new javax.swing.JMenuItem();
@@ -153,6 +154,8 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
         });
 
         mLastCommandStringLabel.setText("Last Command String:");
+
+        mSendToSerialCheckBox.setText("Send to Serial Port");
 
         mFileMenu.setText("File");
 
@@ -202,26 +205,26 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(mLastCommandStringLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(mCommandTextField)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(mCommandTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mControllerModelLabel)
-                                    .addComponent(mControllerLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mModelsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(mControllerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(mStartButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(mStopButton)))))
+                            .addComponent(mControllerModelLabel)
+                            .addComponent(mControllerLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mModelsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mControllerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mSendToSerialCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mStartButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mStopButton)))
                 .addContainerGap())
         );
 
@@ -245,7 +248,8 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mStopButton)
-                    .addComponent(mStartButton))
+                    .addComponent(mStartButton)
+                    .addComponent(mSendToSerialCheckBox))
                 .addContainerGap())
         );
 
@@ -266,7 +270,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_mCharacterizeMenuItemActionPerformed
 
     private void mStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mStartButtonActionPerformed
-        mController.startGamepadThread(mControllerComboBox.getSelectedItem().toString(),mModelsComboBox.getSelectedItem().toString());
+        mController.startGamepadThread(mControllerComboBox.getSelectedItem().toString(),mModelsComboBox.getSelectedItem().toString(), mSendToSerialCheckBox.isSelected());
     }//GEN-LAST:event_mStartButtonActionPerformed
 
     private void mControllerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mControllerComboBoxActionPerformed
@@ -300,6 +304,7 @@ public class USBRobotGamepadApp extends javax.swing.JFrame implements Observer {
     private javax.swing.JMenuBar mMenuBar;
     private javax.swing.JComboBox mModelsComboBox;
     private javax.swing.JMenuItem mSelectComPortMenuItem;
+    private javax.swing.JCheckBox mSendToSerialCheckBox;
     private javax.swing.JButton mStartButton;
     private javax.swing.JButton mStopButton;
     // End of variables declaration//GEN-END:variables

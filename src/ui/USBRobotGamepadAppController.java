@@ -44,7 +44,7 @@ public class USBRobotGamepadAppController {
      * @param modelClassAndFileName - The name of the model class
      * and its .xml file
      */
-    public void startGamepadThread(String controllerName, String modelClassAndFileName) {
+    public void startGamepadThread(String controllerName, String modelClassAndFileName, boolean outputToSerialPort) {
         boolean gamepadModelFound = false;
         boolean functionsFound = false;
         try {
@@ -76,7 +76,7 @@ public class USBRobotGamepadAppController {
             }
             functionsFound = true;
             //Set up the thread
-            GamepadThread gt = new GamepadThread(controllerModel);
+            GamepadThread gt = new GamepadThread(controllerModel, outputToSerialPort);
             gt.setApplicationModel(mModel);
             mModel.setThread(gt);
             Thread t = new Thread(gt);

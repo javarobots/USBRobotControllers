@@ -23,24 +23,31 @@ public class GamepadThread implements Runnable {
     private boolean mStopThread = false;
     private ControllerModel mModel;
     private USBRobotGamepadAppModel mApplicationModel;
+    private boolean mOutputToSerial;
 
-    public GamepadThread(ControllerModel model){
+    public GamepadThread(ControllerModel model, boolean outputToSerial){
         mModel = model;
+        mOutputToSerial = outputToSerial;
     }
 
     @Override
     @SuppressWarnings("SleepWhileInLoop")
     public void run() {
         OutputStream out = null;
+        SerialPort port = null;
         try {
-            //Open up the port to send from
-            SerialPort port = RxTxUtilities.openPortByName(mApplicationModel.getSelectedComPortName());
-            out = port.getOutputStream();
+            if (mOutputToSerial){
+                //Open up the port to send from
+                port = RxTxUtilities.openPortByName(mApplicationModel.getSelectedComPortName());
+                out = port.getOutputStream();
+            }
             while (!mStopThread){
                 try {
                     String cmd = mModel.generateCommand();
-                    byte[] cmdAsBytes = cmd.getBytes();
-                    out.write(cmdAsBytes);
+                    if (mOutputToSerial){
+                        byte[] cmdAsBytes = cmd.getBytes();
+                        out.write(cmdAsBytes);
+                    }
                     mApplicationModel.setCommandString(cmd);
                     mApplicationModel.notifyObservers();
                     Thread.sleep(250);
@@ -49,9 +56,11 @@ public class GamepadThread implements Runnable {
                 }
             }
 
-            //Close the port previously opened
-            port.close();
-            
+            if (mOutputToSerial){
+                //Close the port previously opened
+                port.close();
+            }
+
         } catch (IOException ex) {
             ErrorDialog dialog = new ErrorDialog(mApplicationModel.getParentFrame(), true, ex.getMessage());
             dialog.setVisible(true);
