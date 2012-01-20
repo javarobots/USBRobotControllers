@@ -22,12 +22,12 @@ public class CharacterizeTableModel extends AbstractTableModel {
     private Map<String,Integer> mComponentLookup;
     
     public CharacterizeTableModel(){
-        List<Object> componentList = new ArrayList<Object>();
-        List<Object> valueList = new ArrayList<Object>();
-        mValues = new ArrayList<List<Object>>();
+        List<Object> componentList = new ArrayList<>();
+        List<Object> valueList = new ArrayList<>();
+        mValues = new ArrayList<>();
         mValues.add(componentList);
         mValues.add(valueList);
-        mComponentLookup = new HashMap<String,Integer>();
+        mComponentLookup = new HashMap<>();
     }
     
     @Override

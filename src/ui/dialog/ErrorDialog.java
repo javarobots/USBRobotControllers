@@ -42,7 +42,7 @@ public class ErrorDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Error");
 
-        mErrorMessageLabel.setText("jLabel1");
+        mErrorMessageLabel.setText("Error Message");
 
         mExitButton.setText("Exit");
         mExitButton.addActionListener(new java.awt.event.ActionListener() {

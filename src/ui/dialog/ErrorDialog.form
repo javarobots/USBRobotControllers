@@ -51,7 +51,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="mErrorMessageLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
+        <Property name="text" type="java.lang.String" value="Error Message"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="mExitButton">

@@ -26,7 +26,7 @@ public class DefaultModel implements ControllerModel {
     private List<GamepadFunction> mFunctions;
     
     public DefaultModel(){
-        mFunctions = new ArrayList<GamepadFunction>();
+        mFunctions = new ArrayList<>();
        ConsoleOutput.outToConsole("DefaultModel instantiated.");
     }
     

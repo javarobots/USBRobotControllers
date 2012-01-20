@@ -147,7 +147,7 @@ public class CharacterizeDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void initGamepads() {
-        nameToControllerMap = new HashMap<String,Controller>();
+        nameToControllerMap = new HashMap<>();
         List<Controller> controllers = JinputUtilities.availableGamepads();
         for (Controller c : controllers){
             if (c.getType() == Controller.Type.GAMEPAD){

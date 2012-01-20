@@ -20,7 +20,7 @@ public class JinputUtilities {
     /**
      * Get a list of all available controllers
      * plugged in to the computer
-     * @return 
+     * @return list of available Controller objects
      */
     public static List<Controller> availableGamepads() {
         List<Controller> controllerList = new ArrayList<>();
@@ -59,7 +59,7 @@ public class JinputUtilities {
      * Get a controller object my name and port number
      * @param controllerName - the controller name
      * @param portNumber - the port number
-     * @return 
+     * @return the controller object
      */
     public static Controller getControllerByName(String controllerName, int portNumber){
         ControllerEnvironment env = ControllerEnvironment.getDefaultEnvironment();

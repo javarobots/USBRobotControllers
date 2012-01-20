@@ -11,13 +11,13 @@
     <description>Builds, tests, and runs the project USBRobotControllers.</description>
     <import file="nbproject/build-impl.xml"/>
     
-    <target name="cec" depends="default" description="Moves files necessary to run application">
+    <target name="cec" depends="jar" description="Run jar target and copy needed files">
         <!-- Delete the netbean readme -->
         <delete file="dist/README.TXT"/>
-        
+
         <!-- Copy project readme -->
         <copy file="README.TXT" todir="dist"/>
-        
+
         <!-- Copy dll resources -->
         <copy todir="dist/resources">
             <fileset dir="src/resources/jinput">
@@ -33,11 +33,14 @@
             </fileset>
         </copy>
     </target>
+
+    <target name="cec-javadoc" depends="cec,javadoc" description="Runs cec tartget and generate javadocs"/>
+
     <!--
 
-    There exist several targets which are by default empty and which can be 
-    used for execution of your tasks. These targets are usually executed 
-    before and after some main targets. They are: 
+    There exist several targets which are by default empty and which can be
+    used for execution of your tasks. These targets are usually executed
+    before and after some main targets. They are:
 
       -pre-init:                 called before initialization of project properties
       -post-init:                called after initialization of project properties
@@ -63,12 +66,12 @@
             </obfuscate>
         </target>
 
-    For list of available properties check the imported 
-    nbproject/build-impl.xml file. 
+    For list of available properties check the imported
+    nbproject/build-impl.xml file.
 
 
     Another way to customize the build is by overriding existing main targets.
-    The targets of interest are: 
+    The targets of interest are:
 
       -init-macrodef-javac:     defines macro for javac compilation
       -init-macrodef-junit:     defines macro for junit execution
@@ -76,7 +79,7 @@
       -init-macrodef-java:      defines macro for class execution
       -do-jar-with-manifest:    JAR building (if you are using a manifest)
       -do-jar-without-manifest: JAR building (if you are not using a manifest)
-      run:                      execution of project 
+      run:                      execution of project
       -javadoc-build:           Javadoc generation
       test-report:              JUnit report generation
 
@@ -88,10 +91,10 @@
             </exec>
         </target>
 
-    Notice that the overridden target depends on the jar target and not only on 
-    the compile target as the regular run target does. Again, for a list of available 
+    Notice that the overridden target depends on the jar target and not only on
+    the compile target as the regular run target does. Again, for a list of available
     properties which you can use, check the target you are overriding in the
-    nbproject/build-impl.xml file. 
+    nbproject/build-impl.xml file.
 
     -->
 </project>
