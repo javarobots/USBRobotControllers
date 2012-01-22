@@ -6,10 +6,7 @@ package util.rxtx;
 
 import commonutilities.swing.ComponentPosition;
 import configuration.Configuration;
-import gnu.io.CommPortIdentifier;
-import gnu.io.NoSuchPortException;
-import gnu.io.PortInUseException;
-import gnu.io.SerialPort;
+import gnu.io.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -33,12 +30,13 @@ public class RxTxUtilities {
         return portNames;
     }
 
-    public static SerialPort openPortByName(String name){
+    public static SerialPort openPortByName(String name, int baudRate){
         SerialPort port = null;
         try {
             CommPortIdentifier identifier = CommPortIdentifier.getPortIdentifier(name);
             port = (SerialPort)identifier.open("USBRobotCOntroller", Configuration.OPEN_COMM_PAUSE);
-        } catch (PortInUseException | NoSuchPortException ex) {
+            port.setSerialPortParams(baudRate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+        } catch (PortInUseException | NoSuchPortException | UnsupportedCommOperationException ex) {
             ErrorDialog dialog = new ErrorDialog(null,true,ex.getMessage());
             ComponentPosition.centerFrame(dialog);
             dialog.setVisible(true);

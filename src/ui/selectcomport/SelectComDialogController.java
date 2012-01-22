@@ -20,10 +20,11 @@ public class SelectComDialogController {
         mModel = model;
     }
 
-    public void saveSelectedPort(String selectedPort){
+    public void saveSelectedPort(String selectedPort, Object baudRate){
         JdomDocumentCreator out = new JdomDocumentCreator(Configuration.getInstance().getComSelectionFile());
         Element root = out.createRootElement("serialport");
         out.addElementToElement(root, "selectedport", selectedPort);
+        out.addElementToElement(root, "baudrate", (String) baudRate);
         out.writeDocument();
     }
 

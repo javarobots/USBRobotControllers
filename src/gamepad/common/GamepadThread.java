@@ -38,7 +38,7 @@ public class GamepadThread implements Runnable {
         try {
             if (mOutputToSerial){
                 //Open up the port to send from
-                port = RxTxUtilities.openPortByName(mApplicationModel.getSelectedComPortName());
+                port = RxTxUtilities.openPortByName(mApplicationModel.getSelectedComPortName(), mApplicationModel.getBaudRate());
                 out = port.getOutputStream();
             }
             while (!mStopThread){
@@ -66,7 +66,9 @@ public class GamepadThread implements Runnable {
             dialog.setVisible(true);
         } finally {
             try {
-                out.close();
+                if (out != null){
+                    out.close();
+                }
             } catch (IOException ex) {
 
             }

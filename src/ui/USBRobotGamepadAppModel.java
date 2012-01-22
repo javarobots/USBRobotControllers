@@ -32,6 +32,7 @@ public class USBRobotGamepadAppModel extends Observable {
     private JFrame mParentFrame;
     private boolean mJoystickSelected = false;
     private boolean mSerialportSelected = false;
+    private int mBaudRate = 9600;
 
     public USBRobotGamepadAppModel(JFrame parentFrame){
         mParentFrame = parentFrame;
@@ -60,6 +61,8 @@ public class USBRobotGamepadAppModel extends Observable {
                 Element root = reader.initAndGetRoot();
                 Element selectedPort = root.getChild("selectedport");
                 mSelectedComPortName = selectedPort.getValue();
+                Element baud = root.getChild("baudrate");
+                mBaudRate = Integer.parseInt(baud.getValue());
                 mSerialportSelected = true;
             }
         }
@@ -130,5 +133,16 @@ public class USBRobotGamepadAppModel extends Observable {
         this.mSerialportSelected = mSerialportSelected;
         setChanged();
     }
+
+    public int getBaudRate() {
+        return mBaudRate;
+    }
+
+    public void setBaudRate(int mBaudRate) {
+        this.mBaudRate = mBaudRate;
+        setChanged();
+    }
+
+
 
 }

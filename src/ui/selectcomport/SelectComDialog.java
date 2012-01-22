@@ -30,6 +30,7 @@ public class SelectComDialog extends javax.swing.JDialog implements Observer {
         m.addObserver(this);
         m.notifyObservers();
         mController = new SelectComDialogController(m);
+        mBaudComboBox.setSelectedItem(Integer.toString(mApplicationModel.getBaudRate()));
     }
 
     /**
@@ -45,6 +46,8 @@ public class SelectComDialog extends javax.swing.JDialog implements Observer {
         mSerialPortComboBox = new javax.swing.JComboBox();
         mCancelButton = new javax.swing.JButton();
         mOkButton = new javax.swing.JButton();
+        mBaudRateLabel = new javax.swing.JLabel();
+        mBaudComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Select COM Port");
@@ -65,6 +68,10 @@ public class SelectComDialog extends javax.swing.JDialog implements Observer {
             }
         });
 
+        mBaudRateLabel.setText("Baud Rate:");
+
+        mBaudComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2400", "4800", "9600", "19200", "38400", "57600", "115200", " " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,7 +83,11 @@ public class SelectComDialog extends javax.swing.JDialog implements Observer {
                         .addComponent(mComportLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mSerialPortComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 158, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(mBaudRateLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mBaudComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(mOkButton)
@@ -93,7 +104,9 @@ public class SelectComDialog extends javax.swing.JDialog implements Observer {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mComportLabel)
-                    .addComponent(mSerialPortComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mSerialPortComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mBaudRateLabel)
+                    .addComponent(mBaudComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mCancelButton)
@@ -110,14 +123,17 @@ public class SelectComDialog extends javax.swing.JDialog implements Observer {
 
     private void mOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mOkButtonActionPerformed
         String selectedPortName = mSerialPortComboBox.getSelectedItem().toString();
-        mController.saveSelectedPort(selectedPortName);
+        mController.saveSelectedPort(selectedPortName,mBaudComboBox.getSelectedItem());
         mApplicationModel.setSelectedComPortName(selectedPortName);
+        mApplicationModel.setBaudRate(Integer.parseInt(mBaudComboBox.getSelectedItem().toString()));
         mApplicationModel.setSerialportSelected(true);
         mApplicationModel.notifyObservers();
         this.dispose();
     }//GEN-LAST:event_mOkButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox mBaudComboBox;
+    private javax.swing.JLabel mBaudRateLabel;
     private javax.swing.JButton mCancelButton;
     private javax.swing.JLabel mComportLabel;
     private javax.swing.JButton mOkButton;
