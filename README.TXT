@@ -1,25 +1,28 @@
 The USB Robot Controller Application is a Java application intended to make the
-control of robots utilizing USB joysticks or game pads easier. Joystick can be
-added to the library of available joysticks by writing joystick specific classes
-an adding them to the library.
+control of robots utilizing USB joysticks or game pads easier.
 
 In many cases a user may not know what the functionality of a specific joystick
 is. In this case the application has a characterization UI which shows the button
-names and allows the user to manipulate them to get the device output values.
-Again, after writing the necessary joystick specific class the application will
-have access to it.
-
-Output from the program is also user configurable. Since the intent is to control
-connected robots, the output will require configuration. In this instance the
-output is configured using XML files indicating what buttons will produce an 
-output and what that output will be. This allows known joystick in the library
-to produce different outputs based on the user created XML file.
+names and allows the user to manipulate them and get the device output values.
+All that is necessary for using a joystick is a controller model, function
+classes and an application model .xml file.
 
 Setup:
-Initial setup of the application requires the executable jar file to be ran with
-the arguments for RxTx and JInput. This must be accomplished on the command line. 
+Setup can be done in multiple ways:
+
+1) Run the executbale jar with the arguments rxtx and jinput. This must be
+accomplished on the command line.
 
 java -jar USBRobotControllers.jar rxtx
-javs -jar USBRobotCOntrollers.jar jinput
+java -jar USBRobotCOntrollers.jar jinput
 
-The order of running these is not important.
+The order of running these is not important. Select the bin directory of your
+JVM and install the system .dll files there.
+
+2) Run the executable jar with the following command:
+
+java -jar -Djava.library.path=resources USBRobotControllers.jar
+
+This method does not require you to copy the system .dll files. However, you
+must run the program from the command line. Copying .ddl files allows you to
+double click the .jar file in windows and execute the program.
