@@ -24,5 +24,5 @@ JVM and install the system .dll files there.
 java -jar -Djava.library.path=resources USBRobotControllers.jar
 
 This method does not require you to copy the system .dll files. However, you
-must run the program from the command line. Copying .ddl files allows you to
+must run the program from the command line. Copying .dll files allows you to
 double click the .jar file in windows and execute the program.
